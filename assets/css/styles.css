@@ -213,7 +213,7 @@ header {
 
 /* ---------- ОСНОВНОЙ КОНТЕНТ ---------- */
 .content {
-  margin-left: 250px;
+  margin-left: 350px;
   /* Отступ под ширину бокового меню */
   padding: 40px 20px;
   min-height: 100vh;
