@@ -1,0 +1,143 @@
+/* Основные стили */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8f8f8;
+}
+
+/* Контейнер для центрирования контента */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Шапка */
+header {
+  background: #003366;
+  color: #fff;
+  padding: 1rem 0;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.version-switcher {
+  margin-top: 0.5rem;
+}
+
+.version-switcher label {
+  margin-right: 0.5rem;
+  font-weight: 600;
+}
+
+.version-switcher select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+}
+
+/* Боковая панель со списком содержания */
+.sidebar {
+  background: #fff;
+  padding: 1rem;
+  border-right: 1px solid #ddd;
+  width: 250px;
+  position: fixed;
+  top: 80px;
+  bottom: 0;
+  overflow-y: auto;
+}
+
+.sidebar h2 {
+  font-size: 1.2rem;
+  margin-top: 0;
+}
+
+.sidebar a {
+  color: #003366;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
+}
+
+/* Основной контент */
+.content {
+  margin-left: 270px;
+  padding: 1rem;
+  background: #fff;
+}
+
+/* Стилизация документации (оставляем исходную разметку) */
+#doc-content h1,
+#doc-content h2,
+#doc-content h3,
+#doc-content h4,
+#doc-content h5,
+#doc-content h6 {
+  color: #003366;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+#doc-content p {
+  margin: 1rem 0;
+  line-height: 1.8;
+}
+
+/* Таблицы и примеры кода */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+pre {
+  background: #f1f1f1;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* Футер */
+footer {
+  background: #003366;
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 2rem;
+}
+
+/* Адаптивность */
+@media (max-width: 800px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .content {
+    margin-left: 0;
+  }
+}
