@@ -21,6 +21,7 @@
     a {
       color: #007acc;
       text-decoration: none;
+      word-break: break-all;
     }
 
     a:hover {
@@ -42,6 +43,7 @@
       color: #fff;
       padding: 20px 0;
       text-align: center;
+      position: relative;
     }
 
     header h1 {
@@ -60,6 +62,18 @@
       font-size: 1em;
     }
 
+    .github-header {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 0.9em;
+    }
+
+    .github-header a {
+      color: #fff;
+      font-weight: bold;
+    }
+
     /* Боковая панель */
     nav.sidebar {
       background: #fff;
@@ -70,6 +84,7 @@
       top: 80px;
       bottom: 0;
       overflow-y: auto;
+      box-sizing: border-box;
     }
 
     nav.sidebar h2 {
@@ -84,10 +99,25 @@
 
     nav.sidebar .table-of-contents ol {
       padding-left: 20px;
+      margin: 0;
     }
 
     nav.sidebar .table-of-contents li {
       margin-bottom: 8px;
+      word-break: break-all;
+    }
+
+    /* Секция с GitHub-репозиторием в боковом меню */
+    nav.sidebar .github-sidebar {
+      margin-top: 30px;
+      padding-top: 10px;
+      border-top: 1px solid #ddd;
+      font-size: 0.9em;
+    }
+
+    nav.sidebar .github-sidebar a {
+      color: #007acc;
+      font-weight: bold;
     }
 
     /* Основной контент */
@@ -156,6 +186,17 @@
       text-align: center;
       padding: 20px 0;
       margin-top: 20px;
+      position: relative;
+    }
+
+    .github-footer {
+      font-size: 0.9em;
+      margin-top: 10px;
+    }
+
+    .github-footer a {
+      color: #fff;
+      font-weight: bold;
     }
 
     /* Адаптивность */
@@ -168,6 +209,11 @@
 
       main.content {
         margin-left: 0;
+      }
+
+      header .github-header {
+        position: static;
+        margin-top: 10px;
       }
     }
   </style>
@@ -183,6 +229,11 @@
           <option value="index.html" selected>1.0.0</option>
           <option value="ver/v0.9/index.html">0.9.0</option>
         </select>
+      </div>
+      <div class="github-header">
+        <a href="https://github.com/Netts-official/gasfree_tron" target="_blank">
+          GitHub: github.com/Netts-official/gasfree_tron
+        </a>
       </div>
     </div>
   </header>
@@ -217,6 +268,14 @@
           </ol>
         </li>
       </ol>
+    </div>
+    <div class="github-sidebar">
+      <p>
+        Примеры кода на GitHub:
+        <a href="https://github.com/Netts-official/gasfree_tron" target="_blank">
+          github.com/Netts-official/gasfree_tron
+        </a>
+      </p>
     </div>
   </nav>
 
@@ -514,15 +573,7 @@ print(response.json())</code></pre>
   }
 }</code></pre>
 
-      <!-- Далее следуют остальные разделы API (см. оригинальную документацию) -->
-
-      <h3 id="get-apiv1configproviderall">GET /api/v1/config/provider/all</h3>
-      <p>Получение списка всех поддерживаемых Service-Providers.</p>
-      <ul>
-        <li><strong>Параметры запроса:</strong> отсутствуют</li>
-        <li><strong>Возвращает:</strong> объект с массивом <code>providers</code></li>
-      </ul>
-      <!-- Остальное содержание документации API следует аналогичной структуре -->
+      <!-- Остальные разделы API по аналогичной структуре... -->
 
     </article>
   </main>
@@ -530,12 +581,17 @@ print(response.json())</code></pre>
   <footer>
     <div class="container">
       <p>&copy; 2025 GasFree. Все права защищены.</p>
+      <div class="github-footer">
+        Примеры кода:
+        <a href="https://github.com/Netts-official/gasfree_tron" target="_blank">
+          github.com/Netts-official/gasfree_tron
+        </a>
+      </div>
     </div>
   </footer>
 
-  <!-- Скрипты для интерактивности (при необходимости) -->
+  <!-- Скрипты для интерактивности -->
   <script>
-    // Пример: обработчик смены версии
     document.getElementById('version-select').addEventListener('change', function () {
       window.location.href = this.value;
     });
