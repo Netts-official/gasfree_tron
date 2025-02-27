@@ -34,7 +34,7 @@
           <label for="version-select">Version:</label>
           <select id="version-select" onchange="location = this.value;">
             <option value="index.html" selected>1.0.0</option>
-<!--            <option value="ver/v1.0.0/index.html">>1.0.0</option>-->
+            <!--            <option value="ver/v1.0.0/index.html">>1.0.0</option>-->
           </select>
         </div>
       </div>
@@ -109,7 +109,7 @@
     <div class="container">
       <article id="doc-content">
         <!-- Заголовок страницы -->
-        <h1 id="gasfree-developer-documentation" style="text-align: center";>
+        <h1 id="gasfree-developer-documentation" style="text-align: center" ;>
           Developer Documentation
         </h1>
         <!-- ================== 1. Overview ================== -->
@@ -232,7 +232,7 @@
           3. Signature Algorithm and Provider Endpoint
         </h2>
 
-        <h3 id="31-parameters">3.1 Parameters</h3>
+        <h3 id="31-parameters">Parameters</h3>
         <p>
           The GasFree transfer authorization involves the following parameters.
           Their values on TRON mainnet and Nile testnet are shown in Table 1.
@@ -263,7 +263,7 @@
         </p>
 
         <h3 id="32-authorization-construction-and-signature">
-          3.2 Authorization Construction and Signature
+          Authorization Construction and Signature
         </h3>
         <p><strong>General structure</strong></p>
         <p><em>MessageDomain:</em></p>
@@ -317,7 +317,7 @@
 );
 </code></pre>
 
-        <h3 id="33-provider-endpoint">3.3 Provider Endpoint</h3>
+        <h3 id="33-provider-endpoint">Provider Endpoint</h3>
         <p>
           Wallets/users interact with the Provider's endpoint to submit GasFree
           transfer authorizations and query statuses.
@@ -470,15 +470,32 @@ print(response.json())
   </main>
 
   <!-- Подвал -->
-  <footer>
-    <div class="container footer-content">
-      <p>&copy; 2025 GasFree. Все права защищены.</p>
-      <p>
-        Репозиторий с примерами кода:
-        <a href="https://github.com/Netts-official/gasfree_tron" target="_blank" rel="noopener noreferrer">
-          github.com/Netts-official/gasfree_tron
-        </a>
-      </p>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__body">
+        <div>
+          <p>© 2025 NETTS.</p>
+          <p>Follow us:</p>
+          <div class="footer__icons">
+            <a href="https://x.com/nettswallet" target="_blank">
+              <img src="../img/icons/X.svg" alt="X">
+            </a>
+            <a href="https://t.me/nettswallet" target="_blank">
+              <img src="../img/icons/telega.svg" alt="Telegram">
+            </a>
+            <a href="https://debank.com/official/118059" target="_blank">
+              <img src="../img/icons/debank.png" alt="DeBank">
+            </a>
+            <a href="https://github.com/Netts-official/gasfree_tron" target="_blank">
+              <img src="../img/icons/github.svg" alt="GitHub">
+            </a>
+          </div>
+        </div>
+        <div>
+          <a href="mailto:wallet@netts.io">wallet@netts.io</a><br>
+          <a href="https://endocs.netts.io">Documents</a>
+        </div>
+      </div>
     </div>
   </footer>
 

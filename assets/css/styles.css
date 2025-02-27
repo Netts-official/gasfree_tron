@@ -213,9 +213,10 @@ header {
 
 /* ---------- ОСНОВНОЙ КОНТЕНТ ---------- */
 .content {
-  margin-left: 350px;
-  /* Отступ под ширину бокового меню */
-  padding: 40px 20px;
+  margin-left: 370px;
+  /* Отступ увеличен для зазора между меню и контентом */
+  padding: 40px 30px 40px 20px;
+  /* добавлен правый отступ */
   min-height: 100vh;
   background-color: var(--color-background);
 }
@@ -287,23 +288,36 @@ body.dark-theme code {
 }
 
 /* ---------- ПОДВАЛ ---------- */
-footer {
+footer.footer {
   background: var(--color-footer-bg);
   border-top: 1px solid var(--color-border);
   padding: 20px 0;
 }
 
-.footer-content {
-  text-align: center;
-  font-size: 0.9rem;
+.footer__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.footer-content a {
+.footer__icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.footer__icons a img {
+  width: 24px;
+  height: 24px;
+}
+
+footer a {
   color: var(--color-primary);
   text-decoration: none;
 }
 
-.footer-content a:hover {
+footer a:hover {
   text-decoration: underline;
 }
 
