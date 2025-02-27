@@ -26,15 +26,15 @@
       <div class="header-right">
         <!-- Переключатель темы -->
         <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
-          Тёмная тема
+          Dark theme
         </button>
 
         <!-- Версии -->
         <div class="version-switcher">
-          <label for="version-select">Версия:</label>
+          <label for="version-select">Version:</label>
           <select id="version-select" onchange="location = this.value;">
             <option value="index.html" selected>1.0.0</option>
-            <option value="ver/v0.9/index.html">0.9.0</option>
+            <option value="ver/v1.0.0/index.html">>1.0.0</option>
           </select>
         </div>
       </div>
@@ -122,8 +122,6 @@
         <h1 id="gasfree-developer-documentation">
           GasFree Developer Documentation
         </h1>
-        <p style="text-align: center; margin-bottom: 100px;">Ver: 1.0.0</p>
-
         <div class="table-of-contents">
           <p>Table of Contents</p>
           <ol>
@@ -551,11 +549,11 @@ print(response.json())
       if (body.classList.contains("light-theme")) {
         body.classList.remove("light-theme");
         body.classList.add("dark-theme");
-        themeToggleBtn.textContent = "Светлая тема";
+        themeToggleBtn.textContent = "Dark theme";
       } else {
         body.classList.remove("dark-theme");
         body.classList.add("light-theme");
-        themeToggleBtn.textContent = "Тёмная тема";
+        themeToggleBtn.textContent = "White theme";
       }
     }
 
