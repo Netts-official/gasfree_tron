@@ -105,7 +105,7 @@ header {
   gap: 20px;
 }
 
-/* Дополнительное верхнее меню */
+/* ---------- Верхнее меню ---------- */
 .top-menu {
   display: flex;
   gap: 15px;
@@ -114,13 +114,16 @@ header {
 }
 
 /* -- КНОПКИ верхнего меню -- */
+/* Делаем их уже за счёт уменьшения паддинга */
 .top-menu a {
   display: inline-block;
   background-color: var(--color-primary);
   color: #fff;
   /* Текст на кнопке – белый */
-  padding: 8px 14px;
+  padding: 5px 10px;
+  /* Уменьшенные отступы */
   border-radius: 4px;
+  font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
   transition: background-color 0.3s ease;
@@ -135,7 +138,8 @@ header {
   background-color: var(--color-primary);
   color: #fff;
   border: none;
-  padding: 7px 14px;
+  padding: 5px 10px;
+  /* тоже уменьшаем для единого стиля */
   border-radius: 4px;
   font-size: 0.9rem;
   cursor: pointer;
@@ -169,28 +173,29 @@ header {
 
 /* ---------- БОКОВОЕ МЕНЮ ---------- */
 .sidebar {
+  /* Фон теперь с левой стороны экрана */
   position: fixed;
   top: 60px;
-  left: 40px;
-  /* Увеличили отступ от левого края */
-  width: 350px;
+  left: 0;
+  width: 400px;
+  /* Шире, чтобы оставить "воздух" внутри */
   bottom: 0;
   overflow-y: auto;
   background-color: var(--color-sidebar-bg);
   border-right: 1px solid var(--color-border);
-  padding: 10px;
-  font-size: 0.95rem;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Весь отступ делаем во внутреннем блоке */
+.sidebar-content {
+  padding: 20px;
+  margin-bottom: 50px;
 }
 
 .sidebar h2 {
   color: var(--color-primary);
   font-size: 1.1rem;
   margin-bottom: 12px;
-}
-
-.sidebar-content {
-  margin-bottom: 50px;
 }
 
 .table-of-contents p {
@@ -257,12 +262,18 @@ header {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  /* Смещение вправо */
+  /* сместили вправо */
   margin-top: 20px;
   gap: 5px;
 }
 
-/* Иконки социальных сетей */
+/* Иконки социальных сетей в ряд */
+.footer__icons {
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
 .footer__icons a img {
   width: 24px;
   height: 24px;
@@ -271,8 +282,8 @@ header {
 /* ---------- ОСНОВНОЙ КОНТЕНТ ---------- */
 .content {
   /* Сдвигаем контент, чтобы не наползал на боковое меню */
-  margin-left: 410px;
-  /* 350 ширина меню + 40px отступ + ~20px зазор */
+  margin-left: 400px;
+  /* Равно ширине меню */
   padding: 40px 30px 40px 20px;
   min-height: 100vh;
   background-color: var(--color-background);
