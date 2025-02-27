@@ -16,6 +16,7 @@
   --color-sidebar-bg: #f9f9f9;
   --color-header-bg: #ffffff;
   --color-footer-bg: #ffffff;
+  --color-logo-text: #2c3e50;
 }
 
 /* Для тёмной темы переопределяем те же переменные */
@@ -31,6 +32,7 @@
   --color-sidebar-bg: #292929;
   --color-header-bg: #2a2a2a;
   --color-footer-bg: #2a2a2a;
+  --color-logo-text: #ecf0f1;
 }
 
 /* Сброс отступов, полей */
@@ -62,7 +64,6 @@ body.dark-theme {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-  /* Отступ от левого и правого края */
 }
 
 /* ---------- ШАПКА ---------- */
@@ -81,21 +82,45 @@ header {
   padding: 10px 0;
 }
 
-.site-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--color-primary);
-  margin: 0;
-}
-
 .header-left,
 .header-right {
   display: flex;
   align-items: center;
 }
 
+/* Логотип и название */
+.logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.site-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-logo-text);
+  margin: 0;
+}
+
 .header-right {
   gap: 20px;
+}
+
+/* Дополнительное верхнее меню */
+.top-menu {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.top-menu a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.top-menu a:hover {
+  color: var(--color-primary);
 }
 
 /* Кнопка переключения темы */
@@ -136,8 +161,8 @@ header {
 .sidebar {
   position: fixed;
   top: 60px;
-  /* Чтобы не залезать под header */
-  left: 0;
+  left: 20px;
+  /* Увеличен отступ от левой части экрана */
   width: 350px;
   bottom: 0;
   overflow-y: auto;
@@ -145,6 +170,7 @@ header {
   border-right: 1px solid var(--color-border);
   padding: 10px;
   font-size: 0.95rem;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar h2 {
@@ -214,12 +240,28 @@ header {
   word-wrap: break-word;
 }
 
+/* Форматирование нижней части бокового меню */
+.footer__info,
+.footer__icons,
+.footer__contacts {
+  margin-top: 10px;
+  padding-left: 10px;
+  line-height: 1.6;
+}
+
+.footer__info p {
+  margin-bottom: 5px;
+}
+
+.footer__icons a img {
+  width: 24px;
+  height: 24px;
+}
+
 /* ---------- ОСНОВНОЙ КОНТЕНТ ---------- */
 .content {
   margin-left: 370px;
-  /* Отступ увеличен для зазора между меню и контентом */
   padding: 40px 30px 40px 20px;
-  /* добавлен правый отступ */
   min-height: 100vh;
   background-color: var(--color-background);
 }
@@ -277,7 +319,6 @@ code {
   font-size: 0.95rem;
 }
 
-/* Чтобы в dark-теме inline code смотрелось */
 body.dark-theme code {
   background: rgba(255, 255, 255, 0.1);
 }
@@ -313,11 +354,6 @@ footer.footer {
   gap: 10px;
 }
 
-.footer__icons a img {
-  width: 24px;
-  height: 24px;
-}
-
 footer a {
   color: var(--color-primary);
   text-decoration: none;
@@ -329,8 +365,6 @@ footer a:hover {
 
 /* ---------- АДАПТИВНОСТЬ ---------- */
 @media screen and (max-width: 768px) {
-
-  /* Боковое меню становится статичным сверху/снизу */
   .sidebar {
     position: static;
     width: 100%;

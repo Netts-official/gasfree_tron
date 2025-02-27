@@ -11,19 +11,27 @@
 
   <!-- Подключаем внешний CSS -->
   <link rel="stylesheet" href="assets/css/styles.css" />
-
 </head>
 
 <body class="light-theme">
   <!-- Шапка -->
   <header>
     <div class="header-inner container">
-      <!-- Логотип или название проекта -->
+      <!-- Логотип и название проекта -->
       <div class="header-left">
+        <img src="home/to/your/projects/gasfree_tron/assets/images/logos/logo.svg" alt="Logo" class="logo">
         <h1 class="site-title">GasFree non official</h1>
       </div>
 
       <div class="header-right">
+        <!-- Дополнительное меню -->
+        <nav class="top-menu">
+          <a href="https://netts.io/rent/" target="_blank">Energy rent</a>
+          <a href="https://t.me/netts_energy_order_bot" target="_blank">Energy bot</a>
+          <a href="https://t.me/nettswallet_bot/app" target="_blank">Wallet</a>
+          <a href="https://github.com/Netts-official/gasfree_tron" target="_blank">GitHub</a>
+        </nav>
+
         <!-- Переключатель темы -->
         <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
           Dark theme
@@ -34,7 +42,6 @@
           <label for="version-select">Version:</label>
           <select id="version-select" onchange="location = this.value;">
             <option value="index.html" selected>1.0.0</option>
-            <!--            <option value="ver/v1.0.0/index.html">>1.0.0</option>-->
           </select>
         </div>
       </div>
@@ -101,32 +108,29 @@
           </a>
         </p>
       </div>
-        <div class="footer__info">
-          <p>
-          © 2025 NETTS
-        </p>
-          <p>
-          Follow us:
-        </p>
-        </div>
-        <div class="footer__icons">
-          <a href="https://x.com/nettswallet" target="_blank">
-            <img src="assets/images/logos/X.svg" alt="X">
-          </a>
-          <a href="https://t.me/nettswallet" target="_blank">
-            <img src="assets/images/logos/telega.svg" alt="Telegram">
-          </a>
-          <a href="https://debank.com/official/118059" target="_blank">
-            <img src="assets/images/logos/debank.png" alt="DeBank">
-          </a>
-          <a href="https://github.com/Netts-official/gasfree_tron" target="_blank">
-            <img src="assets/images/logos/github.svg" alt="GitHub">
-          </a>
-        </div>
-        <div class="footer__contacts">
-          <a href="mailto:wallet@netts.io">wallet@netts.io
-          </a>
-        </div>
+
+      <!-- Нижняя часть бокового меню -->
+      <div class="footer__info">
+        <p>© 2025 NETTS</p>
+        <p>Follow us:</p>
+      </div>
+      <div class="footer__icons">
+        <a href="https://x.com/nettswallet" target="_blank">
+          <img src="assets/images/logos/X.svg" alt="X">
+        </a>
+        <a href="https://t.me/nettswallet" target="_blank">
+          <img src="assets/images/logos/telega.svg" alt="Telegram">
+        </a>
+        <a href="https://debank.com/official/118059" target="_blank">
+          <img src="assets/images/logos/debank.png" alt="DeBank">
+        </a>
+        <a href="https://github.com/Netts-official/gasfree_tron" target="_blank">
+          <img src="assets/images/logos/github.svg" alt="GitHub">
+        </a>
+      </div>
+      <div class="footer__contacts">
+        <a href="mailto:wallet@netts.io">wallet@netts.io</a>
+      </div>
     </div>
   </nav>
 
@@ -135,9 +139,7 @@
     <div class="container">
       <article id="doc-content">
         <!-- Заголовок страницы -->
-        <h1 id="gasfree-developer-documentation" style="text-align: center" ;>
-          Developer Documentation
-        </h1>
+        <h1 id="gasfree-developer-documentation" style="text-align: center;">Developer Documentation</h1>
         <!-- ================== 1. Overview ================== -->
         <h2 id="overview">1. Overview</h2>
         <p>
@@ -146,6 +148,11 @@
           It specifically includes four roles: GasFree accounts, Service-Providers,
           wallets, and users.
         </p>
+        <!-- Картинка по центру страницы -->
+        <div class="scheme-image" style="text-align: center; margin: 20px 0;">
+          <img src="home/to/your/projects/gasfree_tron/assets/images/schemes/scheme.jpeg" alt="GasFree Framework Scheme"
+            style="max-width: 100%; height: auto;">
+        </div>
         <p style="text-align: center;"><em>Figure 1. GasFree Framework</em></p>
         <p>
           <strong>GasFree Account:</strong> Generated according to a specific
@@ -495,15 +502,12 @@ print(response.json())
     </div>
   </main>
 
-  <!-- Подвал -->
-
   <!-- Небольшой скрипт для переключения темы -->
   <script>
     const themeToggleBtn = document.getElementById("themeToggleBtn");
     const body = document.body;
 
     function toggleTheme() {
-      // Если сейчас включена "light-theme", переключаем на "dark-theme"
       if (body.classList.contains("light-theme")) {
         body.classList.remove("light-theme");
         body.classList.add("dark-theme");
