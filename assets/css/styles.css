@@ -56,10 +56,13 @@ body.dark-theme {
   line-height: 1.6;
 }
 
+/* Контейнер с внутренними отступами */
 .container {
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 20px;
+  /* Отступ от левого и правого края */
 }
 
 /* ---------- ШАПКА ---------- */
@@ -296,15 +299,18 @@ footer.footer {
 
 .footer__body {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-.footer__icons {
+.footer__info,
+.footer__icons,
+.footer__contacts {
   display: flex;
+  align-items: center;
   gap: 10px;
-  margin-top: 10px;
 }
 
 .footer__icons a img {
@@ -348,5 +354,10 @@ footer a:hover {
   .header-right {
     width: 100%;
     justify-content: space-between;
+  }
+
+  .footer__body {
+    flex-direction: column;
+    text-align: center;
   }
 }
