@@ -113,30 +113,37 @@ header {
   margin-right: 20px;
 }
 
+/* -- КНОПКИ верхнего меню -- */
 .top-menu a {
-  text-decoration: none;
-  color: var(--color-text);
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: #fff;
+  /* Текст на кнопке – белый */
+  padding: 8px 14px;
+  border-radius: 4px;
   font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
 .top-menu a:hover {
-  color: var(--color-primary);
+  opacity: 0.85;
 }
 
 /* Кнопка переключения темы */
 .theme-toggle-btn {
-  background: none;
-  border: 1px solid var(--color-border);
-  padding: 5px 10px;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  padding: 7px 14px;
   border-radius: 4px;
   font-size: 0.9rem;
   cursor: pointer;
-  color: var(--color-text);
-  transition: background 0.2s;
+  transition: opacity 0.2s;
 }
 
 .theme-toggle-btn:hover {
-  background: var(--color-muted-bg);
+  opacity: 0.85;
 }
 
 /* Версии */
@@ -147,8 +154,11 @@ header {
   color: var(--color-text);
 }
 
+.version-switcher label {
+  margin-right: 5px;
+}
+
 .version-switcher select {
-  margin-left: 5px;
   border: 1px solid var(--color-border);
   border-radius: 4px;
   background: transparent;
@@ -161,8 +171,8 @@ header {
 .sidebar {
   position: fixed;
   top: 60px;
-  left: 20px;
-  /* Увеличен отступ от левой части экрана */
+  left: 40px;
+  /* Увеличили отступ от левого края */
   width: 350px;
   bottom: 0;
   overflow-y: auto;
@@ -240,19 +250,19 @@ header {
   word-wrap: break-word;
 }
 
-/* Форматирование нижней части бокового меню */
+/* ---------- НИЖНЯЯ ЧАСТЬ БОКОВОГО МЕНЮ ---------- */
 .footer__info,
 .footer__icons,
 .footer__contacts {
-  margin-top: 10px;
-  padding-left: 10px;
-  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  /* Смещение вправо */
+  margin-top: 20px;
+  gap: 5px;
 }
 
-.footer__info p {
-  margin-bottom: 5px;
-}
-
+/* Иконки социальных сетей */
 .footer__icons a img {
   width: 24px;
   height: 24px;
@@ -260,7 +270,9 @@ header {
 
 /* ---------- ОСНОВНОЙ КОНТЕНТ ---------- */
 .content {
-  margin-left: 370px;
+  /* Сдвигаем контент, чтобы не наползал на боковое меню */
+  margin-left: 410px;
+  /* 350 ширина меню + 40px отступ + ~20px зазор */
   padding: 40px 30px 40px 20px;
   min-height: 100vh;
   background-color: var(--color-background);
@@ -372,6 +384,7 @@ footer a:hover {
     border-bottom: 1px solid var(--color-border);
     top: auto;
     margin-bottom: 20px;
+    left: 0;
   }
 
   .content {
@@ -393,5 +406,11 @@ footer a:hover {
   .footer__body {
     flex-direction: column;
     text-align: center;
+  }
+
+  .footer__info,
+  .footer__icons,
+  .footer__contacts {
+    align-items: center;
   }
 }
