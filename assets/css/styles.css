@@ -1,17 +1,59 @@
-/* Общие стили для сайта */
+/* 
+  Минималистичный дизайн в стиле GitBook.
+  Используются CSS-переменные для светлой и тёмной темы.
+*/
+
+/* Базовые переменные для светлой темы */
+:root {
+  --color-background: #ffffff;
+  --color-text: #333333;
+  --color-primary: #007acc;
+  --color-muted-bg: #f5f7f9;
+  --color-muted-text: #555;
+  --color-border: #e0e0e0;
+  --color-code-bg: #272822;
+  --color-code-text: #f8f8f2;
+  --color-sidebar-bg: #f9f9f9;
+  --color-header-bg: #ffffff;
+  --color-footer-bg: #ffffff;
+}
+
+/* Для тёмной темы переопределяем те же переменные */
+.dark-theme {
+  --color-background: #1f1f1f;
+  --color-text: #e0e0e0;
+  --color-primary: #60aaff;
+  --color-muted-bg: #2a2a2a;
+  --color-muted-text: #a0a0a0;
+  --color-border: #444;
+  --color-code-bg: #2f2f2f;
+  --color-code-text: #f8f8f2;
+  --color-sidebar-bg: #292929;
+  --color-header-bg: #2a2a2a;
+  --color-footer-bg: #2a2a2a;
+}
+
+/* Сброс отступов, полей */
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-/* Основные стили */
-body {
-  font-family: 'Open Sans', sans-serif;
+/* Тело страницы. По умолчанию light-theme */
+body.light-theme {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: "Open Sans", sans-serif;
   line-height: 1.6;
-  background: #f2f6f9;
-  /* Немного изменили фон */
-  color: #333;
-  margin: 0;
-  padding: 0;
+}
+
+/* При dark-theme */
+body.dark-theme {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.6;
 }
 
 .container {
@@ -20,68 +62,101 @@ body {
   margin: 0 auto;
 }
 
-/* Шапка */
+/* ---------- ШАПКА ---------- */
 header {
-  background: linear-gradient(135deg, #007acc, #005f99);
-  color: #fff;
-  padding: 20px 0;
-  text-align: center;
-  position: relative;
+  background-color: var(--color-header-bg);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-header h1 {
-  margin: 0;
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.site-title {
+  font-size: 1.5rem;
   font-weight: 600;
-  font-size: 1.8rem;
-  margin-bottom: 8px;
+  color: var(--color-primary);
+  margin: 0;
 }
 
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-right {
+  gap: 20px;
+}
+
+/* Кнопка переключения темы */
+.theme-toggle-btn {
+  background: none;
+  border: 1px solid var(--color-border);
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--color-text);
+  transition: background 0.2s;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--color-muted-bg);
+}
+
+/* Версии */
 .version-switcher {
-  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--color-text);
 }
 
 .version-switcher select {
-  padding: 5px;
-  border: none;
-  border-radius: 3px;
-  font-size: 1em;
+  margin-left: 5px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-text);
+  padding: 4px 6px;
   cursor: pointer;
 }
 
-.repo-link-top {
-  margin-top: 10px;
-  font-size: 0.95rem;
-  color: #f1f1f1;
-}
-
-.repo-link-top a {
-  color: #e3e3e3;
-  text-decoration: underline;
-}
-
-/* Боковое меню */
+/* ---------- БОКОВОЕ МЕНЮ ---------- */
 .sidebar {
-  background: #fff;
-  border-right: 1px solid #ddd;
-  width: 250px;
   position: fixed;
-  top: 90px;
-  /* немного увеличили, чтобы не налезало на шапку */
+  top: 60px;
+  /* Чтобы не залезать под header */
+  left: 0;
+  width: 250px;
   bottom: 0;
   overflow-y: auto;
+  background-color: var(--color-sidebar-bg);
+  border-right: 1px solid var(--color-border);
   padding: 20px;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+  font-size: 0.95rem;
 }
 
 .sidebar h2 {
-  font-size: 1.2em;
-  margin-top: 0;
-  color: #007acc;
+  color: var(--color-primary);
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.sidebar-content {
+  margin-bottom: 50px;
 }
 
 .table-of-contents p {
-  font-weight: bold;
-  margin-top: 0;
+  margin-bottom: 6px;
+  font-weight: 600;
 }
 
 .table-of-contents ol {
@@ -89,103 +164,100 @@ header h1 {
   margin-bottom: 20px;
 }
 
-.table-of-contents li {
-  margin-bottom: 5px;
-}
-
-.sidebar a {
+.table-of-contents a {
   text-decoration: none;
-  color: #007acc;
+  color: var(--color-text);
   word-wrap: break-word;
-  /* Для переноса длинных ссылок */
-  overflow-wrap: break-word;
-  /* Для переноса длинных ссылок */
 }
 
-.sidebar a:hover {
-  text-decoration: underline;
+.table-of-contents a:hover {
+  color: var(--color-primary);
 }
 
+/* Дополнительный список эндпоинтов */
 .endpoint-list {
   list-style: none;
-  padding-left: 0;
   margin-top: 10px;
+  padding-left: 0;
 }
 
 .endpoint-list li {
   margin-bottom: 8px;
-  font-size: 0.95rem;
-  color: #007acc;
   word-wrap: break-word;
-  /* принудительный перенос */
-  overflow-wrap: break-word;
+  color: var(--color-text);
 }
 
 .endpoint-list code {
-  background: #f7f7f7;
+  font-size: 0.9rem;
+  background: var(--color-muted-bg);
   padding: 2px 4px;
   border-radius: 4px;
 }
 
-/* Ссылка на репозиторий внутри бокового меню */
+/* Ссылка на репозиторий в боковом меню */
 .sidebar-repo-link {
   margin-top: 20px;
-  padding-top: 15px;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--color-border);
+  padding-top: 20px;
 }
 
-/* Основной контент */
+.sidebar-repo-link p {
+  margin-bottom: 6px;
+  color: var(--color-muted-text);
+}
+
+.sidebar-repo-link a {
+  color: var(--color-primary);
+  word-wrap: break-word;
+}
+
+/* ---------- ОСНОВНОЙ КОНТЕНТ ---------- */
 .content {
-  margin-left: 270px;
-  /* отступ, чтобы не налезать на боковое меню */
-  padding: 20px;
-  background: #fff;
+  margin-left: 250px;
+  /* Отступ под ширину бокового меню */
+  padding: 40px 20px;
   min-height: 100vh;
+  background-color: var(--color-background);
 }
 
-/* Оформление заголовков и параграфов в статье */
 article h1,
 article h2,
 article h3,
 article h4,
 article h5,
 article h6 {
-  color: #007acc;
-  margin-top: 1.5em;
+  color: var(--color-primary);
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
 }
 
 article p {
   margin-bottom: 1em;
 }
 
-/* Таблицы */
+/* ---------- ТАБЛИЦЫ ---------- */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 1em;
-  background: #fff;
-}
-
-table,
-th,
-td {
-  border: 1px solid #ddd;
+  margin-bottom: 1.5em;
 }
 
 th,
 td {
+  border: 1px solid var(--color-border);
   padding: 8px;
   text-align: left;
 }
 
 th {
-  background: #f0f0f0;
+  background-color: var(--color-muted-bg);
+  color: var(--color-text);
 }
 
-/* Пример стилей для кода */
+/* ---------- КОД И БЛОКИ КОДА ---------- */
 pre {
-  background: #272822;
-  color: #f8f8f2;
+  background: var(--color-code-bg);
+  color: var(--color-code-text);
   padding: 15px;
   overflow-x: auto;
   border-radius: 4px;
@@ -193,59 +265,74 @@ pre {
 }
 
 code {
-  font-family: Consolas, Menlo, Monaco, "Courier New", monospace;
-  background-color: #eff0f1;
+  background: rgba(0, 0, 0, 0.05);
+  color: inherit;
   padding: 2px 4px;
   border-radius: 3px;
-  color: #333;
-}
-
-/* Стили отдельного блока кода внутри <pre> уже есть выше */
-
-/* Стили для таблицы содержания внутри контента */
-.table-of-contents {
-  background: #f9f9f9;
-  padding: 10px 20px;
-  border: 1px solid #ddd;
-  margin-bottom: 20px;
-  border-radius: 4px;
-}
-
-/* Подвал */
-footer {
-  background: #007acc;
-  color: #fff;
-  padding: 20px 0;
-  text-align: center;
-}
-
-footer p {
-  margin: 0;
+  font-family: Consolas, Menlo, Monaco, "Courier New", monospace;
   font-size: 0.95rem;
 }
 
-.repo-link-footer {
-  margin-top: 10px;
+/* Чтобы в dark-теме inline code смотрелось */
+body.dark-theme code {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ---------- Дополнительный блок таблицы содержания ---------- */
+.table-of-contents {
+  background: var(--color-muted-bg);
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+}
+
+/* ---------- ПОДВАЛ ---------- */
+footer {
+  background: var(--color-footer-bg);
+  border-top: 1px solid var(--color-border);
+  padding: 20px 0;
+}
+
+.footer-content {
+  text-align: center;
   font-size: 0.9rem;
 }
 
-.repo-link-footer a {
-  color: #fff;
+.footer-content a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.footer-content a:hover {
   text-decoration: underline;
 }
 
-/* Адаптивность для мобильных устройств */
+/* ---------- АДАПТИВНОСТЬ ---------- */
 @media screen and (max-width: 768px) {
+
+  /* Боковое меню становится статичным сверху/снизу */
   .sidebar {
     position: static;
     width: 100%;
-    box-shadow: none;
     border-right: none;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--color-border);
+    top: auto;
+    margin-bottom: 20px;
   }
 
   .content {
     margin-left: 0;
-    min-height: auto;
+    padding: 20px;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
   }
 }
