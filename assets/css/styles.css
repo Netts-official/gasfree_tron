@@ -194,6 +194,11 @@ header {
   margin-bottom: 12px;
 }
 
+.sidebar-content h2 {
+  margin-left: auto;
+  margin-right: 0;
+}
+
 .table-of-contents p {
   margin-bottom: 6px;
   font-weight: 600;
