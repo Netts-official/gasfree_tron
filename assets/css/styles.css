@@ -115,7 +115,6 @@ header {
 }
 
 /* -- КНОПКИ верхнего меню -- */
-/* Уменьшаем размер кнопок */
 .top-menu a {
   display: inline-block;
   background-color: var(--color-primary);
@@ -182,7 +181,6 @@ header {
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Уменьшаем внутренний отступ для минимизации отступа от края экрана */
 .sidebar-content {
   padding: 10px;
   margin-bottom: 50px;
@@ -258,7 +256,6 @@ header {
 }
 
 /* ---------- НИЖНЯЯ ЧАСТЬ БОКОВОГО МЕНЮ ---------- */
-/* Центрируем содержимое нижней части */
 .footer__info,
 .footer__icons,
 .footer__contacts {
@@ -269,7 +266,6 @@ header {
   gap: 5px;
 }
 
-/* Иконки социальных сетей в ряд */
 .footer__icons {
   flex-direction: row;
   justify-content: center;
@@ -282,7 +278,6 @@ header {
 }
 
 /* ---------- ОСНОВНОЙ КОНТЕНТ ---------- */
-/* Уменьшили верхний отступ основного контента */
 .content {
   margin-left: 400px;
   padding: 20px 30px 40px 20px;
@@ -424,5 +419,10 @@ footer a:hover {
   .footer__icons,
   .footer__contacts {
     align-items: center;
+  }
+
+  /* На мобильных устройствах схема будет занимать всю ширину */
+  .scheme-image img {
+    max-width: 100% !important;
   }
 }
