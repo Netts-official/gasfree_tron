@@ -11,7 +11,8 @@ This is not the official documentation for GasFee on Tron. Here you will find sc
 
 ## Current Documentation
 
-You can now review the GasFee documentation for version **v1.0.0**.  
+You can now review the GasFee documentation for [**version v1.0.0**](https://netts-official.github.io/gasfree_tron)
+
 All current versions and archives will be available here:  
 [https://github.com/Netts-official/gasfree_tron/tree/main/ver](https://github.com/Netts-official/gasfree_tron/tree/main/ver)
 
