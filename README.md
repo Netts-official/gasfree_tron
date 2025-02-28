@@ -5,7 +5,7 @@ Documentation of the new GasFree functionality from Tron
 ---
 
 **Disclaimer:**  
-This is not the official documentation for GasFee on Tron. Here you will find scripts for interacting with GasFee, documentation, and additional information.
+This is not the official documentation for GasFee on Tron. Here you will find scripts for interacting with GasFree, documentation, and additional information.
 
 ---
 
