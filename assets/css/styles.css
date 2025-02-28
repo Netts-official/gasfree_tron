@@ -310,6 +310,10 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1.5em;
+  overflow-x: auto;
+  /* Горизонтальная прокрутка */
+  display: block;
+  /* Таблица становится блочным элементом для корректной прокрутки */
 }
 
 th,
@@ -389,6 +393,67 @@ footer a:hover {
 
 /* ---------- АДАПТИВНОСТЬ ---------- */
 @media screen and (max-width: 768px) {
+
+  /* Шапка */
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .hamburger-icon {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-text);
+    position: relative;
+  }
+
+  .hamburger-icon::before,
+  .hamburger-icon::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-text);
+  }
+
+  .hamburger-icon::before {
+    top: -8px;
+  }
+
+  .hamburger-icon::after {
+    top: 8px;
+  }
+
+  .top-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: var(--color-header-bg);
+    border: 1px solid var(--color-border);
+    padding: 10px;
+  }
+
+  .top-menu.active {
+    display: flex;
+  }
+
+  /* Боковое меню */
   .sidebar {
     position: static;
     width: 100%;
@@ -402,17 +467,6 @@ footer a:hover {
   .content {
     margin-left: 0;
     padding: 20px;
-  }
-
-  .header-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .header-right {
-    width: 100%;
-    justify-content: space-between;
   }
 
   .footer__body {

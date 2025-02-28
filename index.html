@@ -24,6 +24,11 @@
       </div>
 
       <div class="header-right">
+        <!-- Кнопка гамбургера -->
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span class="hamburger-icon"></span>
+        </button>
+
         <!-- Дополнительное меню -->
         <nav class="top-menu">
           <a href="https://netts.io/rent/" target="_blank">Energy rent</a>
@@ -175,7 +180,8 @@
             <p><strong>Prerequisite:</strong></p>
             <ul>
               <li>The Service-Provider supports GasFree transfers for multiple types of tokens. Call
-                <code>/api/v1/config/token/all</code> to obtain the list of supported tokens.</li>
+                <code>/api/v1/config/token/all</code> to obtain the list of supported tokens.
+              </li>
               <li>When a token that the Provider does not currently support is transferred into a GasFree account, the
                 user uses the withdrawal page provided by GasFree official at <a href="https://gasfree.io/withdraw"
                   target="_blank" rel="noopener noreferrer">https://gasfree.io/withdraw</a> to withdraw the token to
@@ -193,7 +199,8 @@
             <ul>
               <li>When a user conducts a GasFree transfer authorization, first call
                 <code>/api/v1/address/{accountAddress}</code> to query their GasFree account info, including status,
-                balance, and current nonce. Based on this info, construct a GasFree transfer authorization.</li>
+                balance, and current nonce. Based on this info, construct a GasFree transfer authorization.
+              </li>
             </ul>
           </li>
           <li>
@@ -551,7 +558,8 @@ print(response.json())
         <p>This interface returns whether the account is activated, the recommended nonce value, the list of supported
           tokens and current assets. Query the latest assets of the GasFree account on-chain and combine the
           <code>frozen</code> value to limit the maximum transfer-out amount, preventing submission or transfer
-          failures.</p>
+          failures.
+        </p>
         <p><strong>Request parameters:</strong></p>
         <ul>
           <li><code>accountAddress</code>: user's EOA address</li>
@@ -744,10 +752,12 @@ print(response.json())
     </div>
   </main>
 
-  <!-- Скрипт для переключения темы -->
+  <!-- Скрипт для переключения темы и меню -->
   <script>
     const themeToggleBtn = document.getElementById("themeToggleBtn");
     const body = document.body;
+    const menuToggle = document.querySelector('.menu-toggle');
+    const topMenu = document.querySelector('.top-menu');
 
     function toggleTheme() {
       if (body.classList.contains("light-theme")) {
@@ -762,6 +772,10 @@ print(response.json())
     }
 
     themeToggleBtn.addEventListener("click", toggleTheme);
+
+    menuToggle.addEventListener('click', () => {
+      topMenu.classList.toggle('active');
+    });
   </script>
 </body>
 
