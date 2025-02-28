@@ -92,12 +92,12 @@ header {
 /* Добавлен больший отступ справа для логотипа */
 .logo {
   height: 40px;
-  margin-right: 20px;
+  margin-right: 60px;
 }
 
 .site-title {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 700;
   color: var(--color-logo-text);
   margin: 0;
 }
