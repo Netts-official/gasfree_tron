@@ -89,9 +89,10 @@ header {
 }
 
 /* Логотип и название */
+/* Добавлен больший отступ справа для логотипа */
 .logo {
   height: 40px;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .site-title {
@@ -238,6 +239,7 @@ header {
   margin-top: 20px;
   border-top: 1px solid var(--color-border);
   padding-top: 20px;
+  text-align: center;
 }
 
 .sidebar-repo-link p {
@@ -251,12 +253,13 @@ header {
 }
 
 /* ---------- НИЖНЯЯ ЧАСТЬ БОКОВОГО МЕНЮ ---------- */
+/* Центрируем содержимое нижней части */
 .footer__info,
 .footer__icons,
 .footer__contacts {
   display: flex;
   flex-direction: column;
-  align-items: flex;
+  align-items: center;
   margin-top: 20px;
   gap: 5px;
 }
@@ -264,7 +267,7 @@ header {
 /* Иконки социальных сетей в ряд */
 .footer__icons {
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 10px;
 }
 
@@ -274,9 +277,10 @@ header {
 }
 
 /* ---------- ОСНОВНОЙ КОНТЕНТ ---------- */
+/* Уменьшили верхний отступ основного контента */
 .content {
   margin-left: 400px;
-  padding: 40px 30px 40px 20px;
+  padding: 20px 30px 40px 20px;
   min-height: 100vh;
   background-color: var(--color-background);
 }
