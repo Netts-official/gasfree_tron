@@ -1,4 +1,4 @@
-# GasFree Documentation for Tron
+# GasFree Documentation of Tron
 
 **Disclaimer:**  
 This is not the official documentation for GasFee on Tron. Here you will find scripts for interacting with GasFree, documentation, and additional information.

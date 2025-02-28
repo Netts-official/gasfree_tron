@@ -27,15 +27,9 @@
         <!-- Дополнительное меню -->
         <nav class="top-menu">
           <a href="https://netts.io/rent/" target="_blank">Energy rent</a>
-          <a href="https://t.me/netts_energy_order_bot" target="_blank">
-            Energy bot
-          </a>
-          <a href="https://t.me/nettswallet_bot/app" target="_blank">
-            Wallet
-          </a>
-          <a href="https://github.com/Netts-official/gasfree_tron" target="_blank">
-            GitHub
-          </a>
+          <a href="https://t.me/netts_energy_order_bot" target="_blank">Energy bot</a>
+          <a href="https://t.me/nettswallet_bot/app" target="_blank">Wallet</a>
+          <a href="https://github.com/Netts-official/gasfree_tron" target="_blank">GitHub</a>
         </nav>
 
         <!-- Переключатель темы -->
@@ -150,8 +144,10 @@
         <!-- ================== 1. Overview ================== -->
         <h2 id="overview">1. Overview</h2>
         <p>
-          GasFree aims to provide users with a TRC-20/ERC-20 transfer solution that does not require a native token to pay for
-          transaction gas fees. It specifically includes four roles: GasFree accounts, Service-Providers, wallets, and users, as
+          GasFree aims to provide users with a TRC-20/ERC-20 transfer solution that does not require a native token to
+          pay for
+          transaction gas fees. It specifically includes four roles: GasFree accounts, Service-Providers, wallets, and
+          users, as
           shown in Figure 1. below.
         </p>
         <div class="scheme-image" style="text-align: center; margin: 20px 0;">
@@ -160,11 +156,7 @@
         </div>
         <p style="text-align: center;"><em>Figure 1. GasFree Framework</em></p>
 
-        <!-- 
-             С этого места вставляем текст "в точности" 
-             сразу после рисунка согласно запросу 
-        -->
-
+        <!-- ================== 1. Overview (continued) ================== -->
         <p>
           <strong>GasFree Account:</strong> Generated according to a specific
           algorithm. Its permissions are controlled by the user's EOA
@@ -439,7 +431,6 @@ headers = {
 response = requests.get(url, headers=headers)
 print(response.json())
 </code></pre>
-
         <h3 id="api-format-definition">API Format Definition</h3>
         <p>
           When service runs normally, HTTP code = 200. Errors appear in HTTP
@@ -476,21 +467,16 @@ print(response.json())
   }
 }
 </code></pre>
-
         <h3 id="get-apiv1configtokenall">GET /api/v1/config/token/all</h3>
         <p>Get all supported tokens.</p>
-
         <h3 id="get-apiv1configproviderall">GET /api/v1/config/provider/all</h3>
         <p>Get all supported service providers.</p>
-
         <h3 id="get-apiv1addressaccountaddress">
           GET /api/v1/address/{accountAddress}
         </h3>
         <p>Query GasFree account info.</p>
-
         <h3 id="post-apiv1gasfreesubmit">POST /api/v1/gasfree/submit</h3>
         <p>Initiate a GasFree transfer authorization.</p>
-
         <h3 id="get-apiv1gasfreetraceid">GET /api/v1/gasfree/{traceId}</h3>
         <p>
           Query the details of a specified GasFree transfer authorization. All
