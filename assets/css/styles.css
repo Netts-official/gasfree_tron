@@ -1,5 +1,9 @@
-/* ===================== Base Styles & Variables ===================== */
-/* Светлая тема */
+/* 
+  Минималистичный дизайн в стиле GitBook.
+  Используются CSS-переменные для светлой и тёмной темы.
+*/
+
+/* Базовые переменные для светлой темы */
 :root {
   --color-background: #ffffff;
   --color-text: #333333;
@@ -15,7 +19,7 @@
   --color-logo-text: #2c3e50;
 }
 
-/* Тёмная тема */
+/* Для тёмной темы переопределяем те же переменные */
 .dark-theme {
   --color-background: #1f1f1f;
   --color-text: #e0e0e0;
@@ -31,35 +35,39 @@
   --color-logo-text: #ecf0f1;
 }
 
+/* Сброс отступов, полей */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body.light-theme,
+/* Тело страницы. По умолчанию light-theme */
+body.light-theme {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.6;
+}
+
+/* При dark-theme */
 body.dark-theme {
   background-color: var(--color-background);
   color: var(--color-text);
   font-family: "Open Sans", sans-serif;
   line-height: 1.6;
-  min-height: 100vh;
 }
 
-/* ===================== Основной Layout через CSS Grid ===================== */
-/* Располагаем шапку, боковое меню и контент с помощью grid */
-body {
-  display: grid;
-  grid-template-areas:
-    "header header"
-    "sidebar content";
-  grid-template-columns: 400px 1fr;
-  grid-template-rows: auto 1fr;
+/* Контейнер с внутренними отступами */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-/* Шапка */
+/* ---------- ШАПКА ---------- */
 header {
-  grid-area: header;
   background-color: var(--color-header-bg);
   border-bottom: 1px solid var(--color-border);
   position: sticky;
@@ -71,7 +79,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 10px 0;
 }
 
 .header-left,
@@ -80,31 +88,41 @@ header {
   align-items: center;
 }
 
+/* Логотип и название */
+/* Добавлен больший отступ справа для логотипа */
 .logo {
   height: 40px;
-  margin-right: 20px;
+  margin-right: 60px;
 }
 
 .site-title {
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--color-logo-text);
+  margin-left: 30px;
 }
 
-/* Верхнее меню */
+.header-right {
+  gap: 20px;
+}
+
+/* ---------- Верхнее меню ---------- */
 .top-menu {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  gap: 15px;
+  align-items: center;
+  margin-right: 20px;
 }
 
+/* -- КНОПКИ верхнего меню -- */
+/* Уменьшаем размер кнопок */
 .top-menu a {
   display: inline-block;
   background-color: var(--color-primary);
   color: #fff;
-  padding: 4px 8px;
+  padding: 3px 6px;
   border-radius: 4px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
   text-decoration: none;
   transition: background-color 0.3s ease;
@@ -124,20 +142,18 @@ header {
   font-size: 0.8rem;
   cursor: pointer;
   transition: opacity 0.2s;
-  margin-left: 10px;
 }
 
 .theme-toggle-btn:hover {
   opacity: 0.85;
 }
 
-/* Переключатель версий */
+/* Версии */
 .version-switcher {
   display: flex;
   align-items: center;
   font-size: 0.8rem;
   color: var(--color-text);
-  margin-left: 10px;
 }
 
 .version-switcher label {
@@ -153,13 +169,23 @@ header {
   cursor: pointer;
 }
 
-/* ===================== Боковое меню (Sidebar) ===================== */
+/* ---------- БОКОВОЕ МЕНЮ ---------- */
 .sidebar {
-  grid-area: sidebar;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 400px;
+  bottom: 0;
+  overflow-y: auto;
   background-color: var(--color-sidebar-bg);
   border-right: 1px solid var(--color-border);
-  padding: 10px 20px;
-  overflow-y: auto;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Уменьшаем внутренний отступ для минимизации отступа от края экрана */
+.sidebar-content {
+  padding: 10px;
+  margin-bottom: 50px;
 }
 
 .sidebar h2 {
@@ -168,12 +194,14 @@ header {
   margin-bottom: 12px;
 }
 
-.table-of-contents {
-  background: var(--color-muted-bg);
-  padding: 10px 15px;
-  border-radius: 4px;
-  border: 1px solid var(--color-border);
-  margin-bottom: 20px;
+.sidebar-content h2 {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.table-of-contents p {
+  margin-bottom: 6px;
+  font-weight: 600;
 }
 
 .table-of-contents ol {
@@ -191,6 +219,27 @@ header {
   color: var(--color-primary);
 }
 
+/* Дополнительный список эндпоинтов */
+.endpoint-list {
+  list-style: none;
+  margin-top: 10px;
+  padding-left: 0;
+}
+
+.endpoint-list li {
+  margin-bottom: 8px;
+  word-wrap: break-word;
+  color: var(--color-text);
+}
+
+.endpoint-list code {
+  font-size: 0.9rem;
+  background: var(--color-muted-bg);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* Ссылка на репозиторий в боковом меню */
 .sidebar-repo-link {
   margin-top: 20px;
   border-top: 1px solid var(--color-border);
@@ -205,19 +254,25 @@ header {
 
 .sidebar-repo-link a {
   color: var(--color-primary);
+  word-wrap: break-word;
 }
 
-/* Нижняя часть бокового меню */
+/* ---------- НИЖНЯЯ ЧАСТЬ БОКОВОГО МЕНЮ ---------- */
+/* Центрируем содержимое нижней части */
 .footer__info,
-.footer__icons {
+.footer__icons,
+.footer__contacts {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+  gap: 5px;
 }
 
+/* Иконки социальных сетей в ряд */
 .footer__icons {
   flex-direction: row;
+  justify-content: center;
   gap: 10px;
 }
 
@@ -226,19 +281,15 @@ header {
   height: 24px;
 }
 
-/* ===================== Основной контент (Content) ===================== */
+/* ---------- ОСНОВНОЙ КОНТЕНТ ---------- */
+/* Уменьшили верхний отступ основного контента */
 .content {
-  grid-area: content;
-  padding: 20px 30px;
+  margin-left: 400px;
+  padding: 20px 30px 40px 20px;
+  min-height: 100vh;
   background-color: var(--color-background);
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Стили для статьи */
 article h1,
 article h2,
 article h3,
@@ -254,7 +305,7 @@ article p {
   margin-bottom: 1em;
 }
 
-/* ===================== Таблицы ===================== */
+/* ---------- ТАБЛИЦЫ ---------- */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -273,7 +324,7 @@ th {
   color: var(--color-text);
 }
 
-/* ===================== Блоки кода ===================== */
+/* ---------- КОД И БЛОКИ КОДА ---------- */
 pre {
   background: var(--color-code-bg);
   color: var(--color-code-text);
@@ -296,57 +347,82 @@ body.dark-theme code {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* ===================== Mobile Responsive ===================== */
-@media screen and (max-width: 768px) {
+/* ---------- Дополнительный блок таблицы содержания ---------- */
+.table-of-contents {
+  background: var(--color-muted-bg);
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+}
 
-  /* Перестраиваем grid: шапка, затем контент, затем боковое меню */
-  body {
-    grid-template-areas:
-      "header"
-      "content"
-      "sidebar";
-    grid-template-columns: 1fr;
+/* ---------- ПОДВАЛ ---------- */
+footer.footer {
+  background: var(--color-footer-bg);
+  border-top: 1px solid var(--color-border);
+  padding: 20px 0;
+}
+
+.footer__body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer__info,
+.footer__icons,
+.footer__contacts {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+footer a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- АДАПТИВНОСТЬ ---------- */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+    top: auto;
+    margin-bottom: 20px;
+    left: 0;
   }
 
-  /* Корректировка шапки */
+  .content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
   .header-inner {
     flex-direction: column;
     align-items: flex-start;
+    gap: 10px;
   }
 
-  /* Верхнее меню по центру с переносом */
-  .top-menu {
-    justify-content: center;
+  .header-right {
     width: 100%;
+    justify-content: space-between;
   }
 
-  .top-menu a {
-    font-size: 0.85rem;
-    margin: 5px 0;
+  .footer__body {
+    flex-direction: column;
+    text-align: center;
   }
 
-  /* Уменьшаем логотип */
-  .logo {
-    height: 30px;
-    margin-right: 10px;
-  }
-
-  /* Уменьшаем отступы контента */
-  .content {
-    padding: 15px 20px;
-  }
-
-  /* Если таблица выходит за пределы экрана – делаем её прокручиваемой */
-  main.content table {
-    display: block;
-    overflow-x: auto;
-  }
-
-  /* Боковое меню – полная ширина, перемещается вниз */
-  .sidebar {
-    border-right: none;
-    border-top: 1px solid var(--color-border);
-    padding: 10px 20px;
-    margin-top: 20px;
+  .footer__info,
+  .footer__icons,
+  .footer__contacts {
+    align-items: center;
   }
 }
