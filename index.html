@@ -368,22 +368,18 @@
         <h2 id="notes">4. Notes</h2>
         <ol>
           <li style="color:red;">
-            <strong>It is not recommended that the testnet environment be provided to
-              users.</strong>
+            <strong>It is not recommended that the testnet environment be provided to users.</strong>
           </li>
         </ol>
         <p>
-          <strong>The GasFree environment on the TRON testnet is for developer testing
-            only.</strong>
+          <strong>The GasFree environment on the TRON testnet is for developer testing only.</strong>
         </p>
         <p>
-          <strong>Disable testnet for ordinary users after official launch to avoid
-            loss.</strong>
+          <strong>Disable testnet for ordinary users after official launch to avoid loss.</strong>
         </p>
         <ol start="2">
           <li>
-            <strong>Verify balance/status before submitting. See GasFree account
-              interface definition.</strong>
+            <strong>Verify balance/status before submitting. See GasFree account interface definition.</strong>
           </li>
         </ol>
         <p><strong>All amounts are in smallest unit unless stated.</strong></p>
@@ -393,8 +389,8 @@
 
         <h3 id="api-authentication">API Authentication</h3>
         <p>
-          After applying for access, you receive API Key and Secret. Keep Secret
-          safe. The signature is transmitted via HTTP headers.
+          After applying for access, you receive API Key and Secret. Keep Secret safe. The signature is transmitted via
+          HTTP headers.
         </p>
         <p><strong>HTTP header definition:</strong></p>
         <pre><code>{
@@ -442,8 +438,7 @@ print(response.json())
 
         <h3 id="api-format-definition">API Format Definition</h3>
         <p>
-          When service runs normally, HTTP code = <code>200</code>. Errors appear
-          in HTTP body.
+          When service runs normally, HTTP code = <code>200</code>. Errors appear in HTTP body.
         </p>
         <pre><code>{
   "code": 200,
@@ -483,16 +478,69 @@ print(response.json())
         <h3 id="get-apiv1configproviderall">GET /api/v1/config/provider/all</h3>
         <p>Get all supported service providers.</p>
 
-        <h3 id="get-apiv1addressaccountaddress">
-          GET /api/v1/address/{accountAddress}
-        </h3>
+        <h3 id="get-apiv1addressaccountaddress">GET /api/v1/address/{accountAddress}</h3>
         <p>Query GasFree account info.</p>
 
         <h3 id="post-apiv1gasfreesubmit">POST /api/v1/gasfree/submit</h3>
         <p>Initiate a GasFree transfer authorization.</p>
 
         <h3 id="get-apiv1gasfreetraceid">GET /api/v1/gasfree/{traceId}</h3>
-        <p>Query status of a GasFree transfer authorization.</p>
+        <p>
+          Query the details of a specified GasFree transfer authorization. All fields related to the transaction will be
+          empty if the query is made either before the transfer authorization is submitted to the chain or the
+          verification before submitting fails.
+        </p>
+        <p><strong>Required parameters:</strong></p>
+        <ul>
+          <li><code>traceId</code>: id of the GasFree transfer authorization; a path parameter.</li>
+        </ul>
+        <p><strong>Return:</strong> Detailed info on the GasFree transfer authorization.</p>
+        <p><strong>Field description:</strong></p>
+        <ul>
+          <li><code>id</code>: traceId of the GasFree transfer authorization recorded, not the transactionId.</li>
+          <li><code>createdAt</code>: creation time of the transfer authorization.</li>
+          <li><code>accountAddress</code>: user's EOA address.</li>
+          <li><code>gasFreeAddress</code>: user's GasFree account address.</li>
+          <li><code>providerAddress</code>: service-provider address.</li>
+          <li><code>targetAddress</code>: recipient address.</li>
+          <li><code>nonce</code>: nonce value of the GasFree transfer authorization.</li>
+          <li><code>tokenAddress</code>: contract address of the token transferred.</li>
+          <li><code>amount</code>: amount actually transferred to the recipient's address.</li>
+          <li><code>expiredAt</code>: expiration time of this transfer.</li>
+          <li><code>state</code>: current state of this transfer, with the following values:
+            <ul>
+              <li>WAITING – Not started</li>
+              <li>INPROGRESS – In progress</li>
+              <li>CONFIRMING – Confirming</li>
+              <li>SUCCEED – Successful</li>
+              <li>FAILED – Failed</li>
+            </ul>
+          </li>
+          <li><code>estimatedActivateFee</code>: estimated activation fee.</li>
+          <li><code>estimatedTransferFee</code>: estimated transfer fee.</li>
+          <li><code>estimatedTotalFee</code>: estimated activation fee plus estimated transfer fee.</li>
+          <li><code>estimatedTotalCost</code>: estimated amount that the user needs to pay, including the total fee and
+            the transfer amount.</li>
+          <li><code>txnHash</code>: transactionId of the corresponding transaction on-chain.</li>
+          <li><code>txnBlockNum</code>: block height of the corresponding transaction on-chain.</li>
+          <li><code>txnBlockTimestamp</code>: timestamp of the block that contains the corresponding transaction, in
+            milliseconds.</li>
+          <li><code>txnState</code>: state of the corresponding on-chain transaction, with the following values:
+            <ul>
+              <li>INIT – initial state</li>
+              <li>NOT_ON_CHAIN – Not on-chain</li>
+              <li>ON_CHAIN – On-chain, not solidified</li>
+              <li>SOLIDITY – Solidified</li>
+              <li>ON_CHAIN_FAILED – failed to be on-chain</li>
+            </ul>
+          </li>
+          <li><code>txnActivateFee</code>: actual activation fee consumed.</li>
+          <li><code>txnTransferFee</code>: actual transfer fee consumed.</li>
+          <li><code>txnTotalFee</code>: actual total fee consumed.</li>
+          <li><code>txnAmount</code>: actual transferred amount to the recipient address.</li>
+          <li><code>txnTotalCost</code>: actual amount paid by the user, including the total fee and the transferred
+            amount.</li>
+        </ul>
       </article>
     </div>
   </main>
