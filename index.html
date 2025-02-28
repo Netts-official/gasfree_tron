@@ -140,8 +140,8 @@
         <h2 id="overview">1. Overview</h2>
         <p>
           GasFree aims to provide users with a TRC-20/ERC-20 transfer solution that does not require a native token to
-          pay for transaction gas fees.
-          It specifically includes four roles: GasFree accounts, Service-Providers, wallets, and users.
+          pay for transaction gas fees. It specifically includes four roles: GasFree accounts, Service-Providers,
+          wallets, and users, as shown in Figure 1 below.
         </p>
         <div class="scheme-image" style="text-align: center; margin: 20px 0;">
           <img src="assets/images/schemes/scheme.jpeg" alt="GasFree Framework Scheme"
@@ -150,74 +150,84 @@
         <p style="text-align: center;"><em>Figure 1. GasFree Framework</em></p>
         <p>
           <strong>GasFree Account:</strong> Generated according to a specific algorithm. Its permissions are controlled
-          by the user's EOA (Externally Owned Account) address.
-          The user can sign a signature to authorize GasFree transfer of this account.
+          by the user's EOA (Externally Owned Account) address. The user can sign a signature to authorize GasFree
+          transfer of this account.
         </p>
         <p>
           <strong>Service-Provider:</strong> Responsible for collecting users' GasFree transfer authorizations,
-          submitting them to the blockchain, and paying the gas fees on behalf of the users.
-          A handling fee may be charged after the transaction is completed.
+          submitting them to the blockchain, and paying the gas fees on behalf of the users. A handling fee may be
+          charged after the transaction is completed.
         </p>
         <p>
           <strong>Wallet:</strong> After connecting to the GasFree service, the wallet provides end-users with interface
-          functions
-          such as fund inquiry for GasFree accounts and signature for transfer authorization.
+          functions such as fund inquiry for GasFree accounts and signature for transfer authorization.
         </p>
 
         <!-- ================== 2. Authorization Process ================== -->
         <h2 id="authorization-process">2. Authorization Process</h2>
         <p>
           Integrating GasFree into the wallet involves constructing transfer authorization, signing it, and having the
-          provider submit it to the blockchain.
+          provider submit it to the blockchain. For detailed information about the Provider API interface, please refer
+          to Section 5 of this document.
         </p>
         <ol>
           <li>
             <p><strong>Prerequisite:</strong></p>
             <ul>
-              <li>Call <code>/api/v1/config/token/all</code> to obtain the list of supported tokens.</li>
-              <li>If a token not supported by the Provider is transferred into a GasFree account, use the withdrawal
-                page at
-                <a href="https://gasfree.io/withdraw" target="_blank"
-                  rel="noopener noreferrer">https://gasfree.io/withdraw</a>
-                to withdraw to the EOA address.
-              </li>
-              <li>Call <code>/api/v1/config/provider/all</code> to obtain the list of Service-Providers.</li>
-              <li>A GasFree account is inactive by default and will be activated during the first transfer. An
-                <code>activation fee</code> is charged once; subsequent transfers only incur a
-                <code>transfer fee</code>.</li>
+              <li>The Service-Provider supports GasFree transfers for multiple types of tokens. Call
+                <code>/api/v1/config/token/all</code> to obtain the list of supported tokens.</li>
+              <li>When a token that the Provider does not currently support is transferred into a GasFree account, the
+                user uses the withdrawal page provided by GasFree official at <a href="https://gasfree.io/withdraw"
+                  target="_blank" rel="noopener noreferrer">https://gasfree.io/withdraw</a> to withdraw the token to
+                their EOA (Externally Owned Account) address.</li>
+              <li>GasFree supports multiple Service-Providers. Call <code>/api/v1/config/provider/all</code> to obtain
+                the list of available Service-Providers.</li>
+              <li>The GasFree account is in an inactive state by default. An inactive GasFree account will be
+                automatically activated during the first GasFree transfer. When activating the GasFree account, an
+                additional <code>activation fee</code> will be charged. For subsequent GasFree transfer authorizations,
+                only the <code>transfer fee</code> will be charged.</li>
             </ul>
           </li>
           <li>
             <p><strong>Preparation:</strong></p>
             <ul>
-              <li>Call <code>/api/v1/address/{accountAddress}</code> to query the GasFree account info and construct the
-                transfer authorization accordingly.</li>
+              <li>When a user conducts a GasFree transfer authorization, first call
+                <code>/api/v1/address/{accountAddress}</code> to query their GasFree account info, including status,
+                balance, and current nonce. Based on this info, construct a GasFree transfer authorization.</li>
             </ul>
           </li>
           <li>
             <p><strong>Sign authorization:</strong></p>
             <ul>
-              <li>The signature algorithm is based on EIP712 (see Section 3.2 for details).</li>
+              <li>The signature algorithm for GasFree transfer authorization is designed to support subsequent upgrades
+                of the signature algorithm. The signature algorithm of the current version is compatible with the EIP712
+                specification (see Section 3.2 for details).</li>
             </ul>
           </li>
           <li>
             <p><strong>Submit authorization:</strong></p>
             <ul>
-              <li>Use <code>/api/v1/gasfree/submit</code> to send the signed transfer authorization to the
+              <li>Use <code>/api/v1/gasfree/submit</code> to send the signed GasFree transfer authorization to the
                 Service-Provider.</li>
             </ul>
           </li>
           <li>
             <p><strong>Handling of provider response:</strong></p>
             <ul>
-              <li>If successful, the provider returns a unique <code>traceId</code> to track on-chain status.</li>
-              <li>If failed, the wallet must notify the user of rejection (no on-chain transaction).</li>
+              <li>After receiving the GasFree transfer authorization submitted by the user, the provider will conduct a
+                verification and immediately return the verification result to the wallet:</li>
+              <li>If successful, notify the user that the authorization verification has passed, and include a globally
+                unique <code>traceId</code>. Subsequently, the on-chain status of this authorization can be tracked
+                based on this <code>traceId</code>.</li>
+              <li>If failed, notify the user of the failure, stating that the authorization has been discarded and this
+                request will not trigger an actual transaction on the blockchain.</li>
             </ul>
           </li>
           <li>
             <p><strong>Monitoring:</strong></p>
             <ul>
-              <li>Call <code>/api/v1/gasfree/{traceId}</code> to query the status of the authorization.</li>
+              <li>Call <code>/api/v1/gasfree/{traceId}</code> to query the status of the GasFree transfer authorization.
+              </li>
             </ul>
           </li>
         </ol>
@@ -297,7 +307,22 @@
   nonce: 0
 };
 </code></pre>
+        <p><strong>Field description:</strong></p>
+        <ul>
+          <li><code>token</code>: address of transferring token</li>
+          <li><code>serviceProvider</code>: address of Service-Provider</li>
+          <li><code>user</code>: user's EOA address, not GasFree address</li>
+          <li><code>receiver</code>: recipient address of the transfer</li>
+          <li><code>value</code>: amount of the transfer, e.g., 90 USDT equals 90 * 10^6</li>
+          <li><code>maxFee</code>: maximum fee limit (transfer fee + activation fee), in smallest unit, e.g., 20 USDT
+            equals 20 * 10^6</li>
+          <li><code>deadline</code>: expiration timestamp of the transfer, in seconds, e.g., Date.now() / 1000</li>
+          <li><code>version</code>: version of the signature, current version is 1</li>
+          <li><code>nonce</code>: nonce value of the transfer authorization, e.g., 0</li>
+        </ul>
         <p><strong>Sign with Wallet</strong></p>
+        <p>Using the above structure, you can call the TRON wallet to sign the TIP-712 Message, which will provide the
+          required <code>sig</code> parameter.</p>
         <pre><code>const signature = await window.tron.tronWeb.trx._signTypedData(
   Permit712MessageDomain,
   Permit712MessageTypes,
@@ -320,28 +345,37 @@
               rel="noopener noreferrer">https://test-nile.gasfree.io</a>
           </li>
         </ul>
-        <p><em>Note: TRON only for now, possibly EVM expansions later.</em></p>
+        <p><em>Note: Currently, GasFree only provides services in the TRON network and can be extended to Ethereum and
+            various EVM-compatible chains in the future.</em></p>
 
         <!-- ================== 4. Notes ================== -->
         <h2 id="notes">4. Notes</h2>
         <ol>
           <li style="color:red;"><strong>It is not recommended that the testnet environment be provided to
-              users.</strong></li>
+              users.</strong>
+            <p>The GasFree environment on the TRON testnet is only available for developer teams to conduct testing and
+              debugging during integration.</p>
+            <p>It is strongly recommended to close the entrance to the GasFree test environment for ordinary users after
+              the official launch to prevent users from filling in the wrong recipient addresses and incurring asset
+              losses.</p>
+          </li>
+          <li><strong>It is recommended to conduct balance and status verification before submitting transfer
+              authorization.</strong>
+            <p>For details, please refer to the definition of GasFree account interface.</p>
+            <p>Unless otherwise specified, all references to asset balances and amounts in this document are in the
+              smallest unit.</p>
+          </li>
         </ol>
-        <p><strong>The GasFree environment on the TRON testnet is for developer testing only.</strong></p>
-        <p><strong>Disable testnet for ordinary users after official launch to avoid loss.</strong></p>
-        <ol start="2">
-          <li><strong>Verify balance/status before submitting. See GasFree account interface definition.</strong></li>
-        </ol>
-        <p><strong>All amounts are in smallest unit unless stated.</strong></p>
 
         <!-- ================== 5. APIs ================== -->
         <h2 id="apis">5. APIs</h2>
 
         <h3 id="api-authentication">API Authentication</h3>
         <p>
-          After applying for access, you receive API Key and Secret. Keep the Secret safe.
-          The signature is transmitted via HTTP headers.
+          After applying for access to the GasFree project, the access party will receive a pair of keys: API Key and
+          API Secret. This key pair is used to sign API requests. Please make sure to keep the API Secret properly. The
+          GasFree server verifies the requests, and the signature information is transmitted through the HTTP header.
+          Please contact GasFree to submit your application for API Key and API Secret.
         </p>
         <p><strong>HTTP header definition:</strong></p>
         <pre><code>{
@@ -389,8 +423,9 @@ print(response.json())
 
         <h3 id="api-format-definition">API Format Definition</h3>
         <p>
-          When the service runs normally, HTTP code = <code>200</code>.
-          Errors appear in the HTTP body.
+          When the service runs normally, the HTTP code returned by the API is <code>200</code>. Parameter errors or
+          runtime errors are reflected in the HTTP body. The <code>code</code> field indicates the status: 200 for
+          success, 400 for input errors, and 500 for runtime errors.
         </p>
         <pre><code>{
   "code": 200,
@@ -424,6 +459,150 @@ print(response.json())
 }
 </code></pre>
 
+        <!-- GET /api/v1/config/token/all -->
+        <h3 id="get-apiv1configtokenall">GET /api/v1/config/token/all</h3>
+        <p><strong>Get the contract list of all supported tokens.</strong></p>
+        <p><strong>Request parameters:</strong> None</p>
+        <p><strong>Return:</strong> An object containing <code>tokens</code>, the list of supported token contracts.</p>
+        <p><strong>Field description:</strong></p>
+        <ul>
+          <li><code>tokenAddress</code>: token contract address</li>
+          <li><code>activateFee</code>: the activation handling fee paid in the transfer token, measured in the smallest
+            unit of that token; this value can be adjusted according to actual circumstances later</li>
+          <li><code>transferFee</code>: the transfer fee, paid in the transfer currency, measured in the smallest unit
+            of that token; this value can be adjusted according to actual circumstances later</li>
+          <li><code>symbol</code>: token name</li>
+          <li><code>decimal</code>: token precision</li>
+        </ul>
+        <p><strong>Return example:</strong></p>
+        <pre><code>{
+  "code": 200,
+  "reason": null,
+  "message": null,
+  "data": {
+    "tokens": [
+      {
+        "tokenAddress": "TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf",
+        "createdAt": "2024-10-09T08:14:12.560+00:00",
+        "updatedAt": "2024-10-09T08:14:12.560+00:00",
+        "activateFee": 10000000, // stands for 10 USDT
+        "transferFee": 10000000, // stands for 10 USDT
+        "supported": true,
+        "symbol": "USDT",
+        "decimal": 6
+      }
+    ]
+  }
+}
+</code></pre>
+
+        <!-- GET /api/v1/config/provider/all -->
+        <h3 id="get-apiv1configproviderall">GET /api/v1/config/provider/all</h3>
+        <p><strong>Get the list of all supported service providers.</strong></p>
+        <p><strong>Request parameters:</strong> None</p>
+        <p><strong>Return:</strong> An object containing <code>providers</code>, a list of all available
+          Service-Providers.</p>
+        <p><strong>Field description:</strong></p>
+        <ul>
+          <li><code>address</code>: address of the Service-Provider</li>
+          <li><code>name</code>: Provider’s name</li>
+          <li><code>icon</code>: Provider’s icon</li>
+          <li><code>website</code>: Provider’s website</li>
+          <li><code>config</code>: system parameters of the Provider, including:
+            <ul>
+              <li><code>maxPendingTransfer</code>: the maximum number of transfer authorizations waiting to be on-chain
+                that users are allowed to submit; if exceeded, an error will be reported (currently, only one transfer
+                authorization in the "pending" status is supported for the same account)</li>
+              <li><code>minDeadlineDuration</code>: minimum deadline interval; authorizations with a deadline less than
+                this value from the current time will be rejected (in seconds)</li>
+              <li><code>maxDeadlineDuration</code>: maximum deadline interval; authorizations with a deadline more than
+                this value from the current time will be rejected (in seconds)</li>
+              <li><code>defaultDeadlineDuration</code>: recommended default deadline interval</li>
+            </ul>
+          </li>
+        </ul>
+        <p><strong>Return example:</strong></p>
+        <pre><code>{
+  "code": 200,
+  "reason": null,
+  "message": null,
+  "data": {
+    "providers": [
+      {
+        "address": "TQ6qStrS2ZJ96gieZJC8AurTxwqJETmjfp",
+        "name": "Provider-1",
+        "icon": "",
+        "website": "",
+        "config": {
+          "maxPendingTransfer": 1,
+          "minDeadlineDuration": 60,
+          "maxDeadlineDuration": 600,
+          "defaultDeadlineDuration": 180
+        }
+      }
+    ]
+  }
+}
+</code></pre>
+
+        <!-- GET /api/v1/address/{accountAddress} -->
+        <h3 id="get-apiv1addressaccountaddress">GET /api/v1/address/{accountAddress}</h3>
+        <p><strong>Query the relevant information of the user's GasFree account.</strong></p>
+        <p>This interface returns whether the account is activated, the recommended nonce value, the list of supported
+          tokens and current assets. Query the latest assets of the GasFree account on-chain and combine the
+          <code>frozen</code> value to limit the maximum transfer-out amount, preventing submission or transfer
+          failures.</p>
+        <p><strong>Request parameters:</strong></p>
+        <ul>
+          <li><code>accountAddress</code>: user's EOA address</li>
+        </ul>
+        <p><strong>Return:</strong> Asset info of the user's GasFree account.</p>
+        <p><strong>Field description:</strong></p>
+        <ul>
+          <li><code>accountAddress</code>: user’s EOA address</li>
+          <li><code>gasFreeAddress</code>: user's GasFree account address</li>
+          <li><code>active</code>: activation status of the GasFree account</li>
+          <li><code>nonce</code>: the recommended nonce value for the next GasFree transfer; since there may be
+            authorizations waiting to be on-chain, the backend provides this by considering on-chain and queue
+            situations</li>
+          <li><code>allow_submit</code>: whether users are currently allowed to continue submitting transfer
+            authorizations</li>
+          <li><code>assets</code>: details of the assets processed through the GasFree service provider, including:
+            <ul>
+              <li><code>tokenAddress</code>: contract address of the token</li>
+              <li><code>tokenSymbol</code>: token name</li>
+              <li><code>activateFee</code>: the activation handling fee for this token, in smallest unit</li>
+              <li><code>transferFee</code>: the transfer fee for this token, in smallest unit</li>
+              <li><code>decimal</code>: precision of the token</li>
+              <li><code>frozen</code>: current amount of the GasFree transfer in progress, including fees</li>
+            </ul>
+          </li>
+        </ul>
+        <p><strong>Return example:</strong></p>
+        <pre><code>{
+  "code": 200,
+  "reason": null,
+  "message": null,
+  "data": {
+    "accountAddress": "TKtWbdzEq5ss9vTS9kwRhBp5mXmBfBns3E",
+    "gasFreeAddress": "TLGVf7MRsLG7XxBkJKy8wnCVcDnAeXYNCb",
+    "active": true,
+    "nonce": 1,
+    "allow_submit": false,
+    "assets": [
+      {
+        "tokenAddress": "TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf",
+        "tokenSymbol": "USDT",
+        "activateFee": 10000000,
+        "transferFee": 10000000,
+        "decimal": 6,
+        "frozen": 0
+      }
+    ]
+  }
+}
+</code></pre>
+
         <!-- POST /api/v1/gasfree/submit -->
         <h3 id="post-apiv1gasfreesubmit">POST /api/v1/gasfree/submit</h3>
         <p><strong>Initiate a GasFree transfer authorization.</strong></p>
@@ -435,12 +614,12 @@ print(response.json())
           <li><code>receiver</code>: recipient address of the transfer</li>
           <li><code>value</code>: amount for the transfer</li>
           <li><code>maxFee</code>: maximum fee limit (transfer fee + activation fee)</li>
-          <li><code>deadline</code>: expiration timestamp (in seconds) of this transfer</li>
+          <li><code>deadline</code>: expiration timestamp of this transfer, in seconds</li>
           <li><code>version</code>: signature version of transfer authorization</li>
           <li><code>nonce</code>: nonce value of this transfer authorization</li>
           <li><code>sig</code>: user's signature of the GasFree transfer authorization</li>
         </ul>
-        <p><strong>Return example:</strong></p>
+        <p><strong>Request example:</strong></p>
         <pre><code>{
   "token": "TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf",
   "provider": "TCETRh3aED4kdkaYQY7CcxeTJtrQvwBpNT",
@@ -508,151 +687,59 @@ print(response.json())
 </code></pre>
         <p><strong>Error types:</strong></p>
         <ul>
-          <li>ProviderAddressNotMatchException: Provider’s address does not match</li>
-          <li>DeadlineExceededException: authorization is expired</li>
-          <li>InvalidSignatureException: signature is incorrect</li>
-          <li>UnsupportedTokenException: token transferred is not supported</li>
-          <li>TooManyPendingTransferException: too many pending transfer authorizations</li>
-          <li>VersionNotSupportedException: signature version of transfer authorization is not supported</li>
-          <li>NonceNotMatchException: nonce does not match</li>
-          <li>MaxFeeExceededException: estimated fee exceeds the maximum fee limit</li>
-          <li>InsufficientBalanceException: insufficient balance</li>
+          <li><code>ProviderAddressNotMatchException</code>: Provider’s address does not match</li>
+          <li><code>DeadlineExceededException</code>: authorization is expired</li>
+          <li><code>InvalidSignatureException</code>: signature is incorrect</li>
+          <li><code>UnsupportedTokenException</code>: token transferred is not supported</li>
+          <li><code>TooManyPendingTransferException</code>: too many pending transfer authorizations</li>
+          <li><code>VersionNotSupportedException</code>: signature version of transfer authorization is not supported
+          </li>
+          <li><code>NonceNotMatchException</code>: nonce does not match</li>
+          <li><code>MaxFeeExceededException</code>: estimated fee exceeds the maximum fee limit</li>
+          <li><code>InsufficientBalanceException</code>: insufficient balance</li>
         </ul>
 
-        <!-- GET /api/v1/address/{accountAddress} -->
-        <h3 id="get-apiv1addressaccountaddress">GET /api/v1/address/{accountAddress}</h3>
-        <p><strong>Query the relevant information of the user's GasFree account.</strong></p>
-        <p>This interface returns whether the account is activated, the recommended nonce value,
-          the list of supported tokens and current assets. It combines the “frozen” value (representing pending
-          transfers)
-          to limit the maximum transfer-out amount, preventing submission or transfer failures.</p>
+        <!-- GET /api/v1/gasfree/{traceId} -->
+        <h3 id="get-apiv1gasfreetraceid">GET /api/v1/gasfree/{traceId}</h3>
+        <p><strong>Query the details of a specified GasFree transfer authorization.</strong></p>
         <p><strong>Request parameters:</strong></p>
         <ul>
-          <li><code>accountAddress</code>: user's EOA address</li>
+          <li><code>traceId</code>: id of the GasFree transfer authorization</li>
         </ul>
-        <p><strong>Return:</strong> Asset info of the user's GasFree account.</p>
+        <p><strong>Return:</strong> Detailed info on the GasFree transfer authorization.</p>
         <p><strong>Field description:</strong></p>
         <ul>
+          <li><code>id</code>: traceId of the GasFree transfer authorization recorded, not the transactionId</li>
+          <li><code>createdAt</code>: creation time of the transfer authorization</li>
           <li><code>accountAddress</code>: user's EOA address</li>
           <li><code>gasFreeAddress</code>: user's GasFree account address</li>
-          <li><code>active</code>: activation status of the GasFree account</li>
-          <li><code>nonce</code>: recommended nonce value for the next transfer</li>
-          <li><code>allow_submit</code>: whether new transfer authorizations can be submitted</li>
-          <li><code>assets</code>: list of tokens processed through the GasFree service, with details:
-            <ul>
-              <li><code>tokenAddress</code>: token contract address</li>
-              <li><code>tokenSymbol</code>: token name</li>
-              <li><code>activateFee</code>: activation fee (in smallest unit)</li>
-              <li><code>transferFee</code>: transfer fee (in smallest unit)</li>
-              <li><code>decimal</code>: token precision</li>
-              <li><code>frozen</code>: current amount of transfer in progress (including fees)</li>
-            </ul>
-          </li>
+          <li><code>providerAddress</code>: service-provider address</li>
+          <li><code>targetAddress</code>: recipient address</li>
+          <li><code>nonce</code>: nonce value of the GasFree transfer authorization</li>
+          <li><code>tokenAddress</code>: contract address of the token transferred</li>
+          <li><code>amount</code>: amount actually transferred to the recipient's address</li>
+          <li><code>expiredAt</code>: expiration time of this transfer</li>
+          <li><code>state</code>: current state of this transfer (WAITING, INPROGRESS, CONFIRMING, SUCCEED, FAILED)</li>
+          <li><code>estimatedActivateFee</code>: estimated activation fee</li>
+          <li><code>estimatedTransferFee</code>: estimated transfer fee</li>
+          <li><code>estimatedTotalFee</code>: estimated activation fee plus estimated transfer fee</li>
+          <li><code>estimatedTotalCost</code>: estimated amount that the user needs to pay, including the total fee and
+            the transfer amount</li>
+          <li><code>txnHash</code>: transactionId of the corresponding transaction on-chain</li>
+          <li><code>txnBlockNum</code>: block height of the corresponding transaction on-chain</li>
+          <li><code>txnBlockTimestamp</code>: timestamp of the block containing the corresponding transaction, in
+            milliseconds</li>
+          <li><code>txnState</code>: state of the corresponding on-chain transaction (INIT, NOT_ON_CHAIN, ON_CHAIN,
+            SOLIDITY, ON_CHAIN_FAILED)</li>
+          <li><code>txnActivateFee</code>: actual activation fee consumed</li>
+          <li><code>txnTransferFee</code>: actual transfer fee consumed</li>
+          <li><code>txnTotalFee</code>: actual total fee consumed</li>
+          <li><code>txnAmount</code>: actual transferred amount to the recipient address</li>
+          <li><code>txnTotalCost</code>: actual amount paid by the user, including the total fee and the transferred
+            amount</li>
         </ul>
-        <p><strong>Return example:</strong></p>
-        <pre><code>{
-  "code": 200,
-  "reason": null,
-  "message": null,
-  "data": {
-    "accountAddress": "TKtWbdzEq5ss9vTS9kwRhBp5mXmBfBns3E",
-    "gasFreeAddress": "TLGVf7MRsLG7XxBkJKy8wnCVcDnAeXYNCb",
-    "active": true,
-    "nonce": 1,
-    "allow_submit": false,
-    "assets": [
-      {
-        "tokenAddress": "TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf",
-        "tokenSymbol": "USDT",
-        "activateFee": 10000000,
-        "transferFee": 10000000,
-        "decimal": 6,
-        "frozen": 0
-      }
-    ]
-  }
-}
-</code></pre>
-
-        <!-- GET /api/v1/config/provider/all -->
-        <h3 id="get-apiv1configproviderall">GET /api/v1/config/provider/all</h3>
-        <p><strong>Get the list of all supported service providers.</strong></p>
-        <p><strong>Request parameters:</strong> None</p>
-        <p><strong>Return:</strong> An object containing <code>providers</code>, a list of all available
-          Service-Providers.</p>
-        <p><strong>Field description:</strong></p>
-        <ul>
-          <li><code>address</code>: address of the Service-Provider</li>
-          <li><code>name</code>: Provider’s name</li>
-          <li><code>icon</code>: Provider’s icon</li>
-          <li><code>website</code>: Provider’s website</li>
-          <li><code>config</code>: system parameters of the Provider, including:
-            <ul>
-              <li><code>maxPendingTransfer</code>: maximum pending transfers allowed</li>
-              <li><code>minDeadlineDuration</code>: minimum deadline interval (in seconds)</li>
-              <li><code>maxDeadlineDuration</code>: maximum deadline interval (in seconds)</li>
-              <li><code>defaultDeadlineDuration</code>: recommended default deadline interval</li>
-            </ul>
-          </li>
-        </ul>
-        <p><strong>Return example:</strong></p>
-        <pre><code>{
-  "code": 200,
-  "reason": null,
-  "message": null,
-  "data": {
-    "providers": [
-      {
-        "address": "TQ6qStrS2ZJ96gieZJC8AurTxwqJETmjfp",
-        "name": "Provider-1",
-        "icon": "",
-        "website": "",
-        "config": {
-          "maxPendingTransfer": 1,
-          "minDeadlineDuration": 60,
-          "maxDeadlineDuration": 600,
-          "defaultDeadlineDuration": 180
-        }
-      }
-    ]
-  }
-}
-</code></pre>
-
-        <!-- GET /api/v1/config/token/all -->
-        <h3 id="get-apiv1configtokenall">GET /api/v1/config/token/all</h3>
-        <p><strong>Get the contract list of all supported tokens.</strong></p>
-        <p><strong>Request parameters:</strong> None</p>
-        <p><strong>Return:</strong> An object containing <code>tokens</code>, the list of supported token contracts.</p>
-        <p><strong>Field description:</strong></p>
-        <ul>
-          <li><code>tokenAddress</code>: token contract address</li>
-          <li><code>activateFee</code>: activation fee (in smallest unit)</li>
-          <li><code>transferFee</code>: transfer fee (in smallest unit)</li>
-          <li><code>symbol</code>: token name</li>
-          <li><code>decimal</code>: token precision</li>
-        </ul>
-        <p><strong>Return example:</strong></p>
-        <pre><code>{
-  "code": 200,
-  "reason": null,
-  "message": null,
-  "data": {
-    "tokens": [
-      {
-        "tokenAddress": "TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf",
-        "createdAt": "2024-10-09T08:14:12.560+00:00",
-        "updatedAt": "2024-10-09T08:14:12.560+00:00",
-        "activateFee": 10000000,
-        "transferFee": 10000000,
-        "supported": true,
-        "symbol": "USDT",
-        "decimal": 6
-      }
-    ]
-  }
-}
-</code></pre>
+        <p><strong>Note:</strong> All fields related to the transaction will be empty if the query is made either before
+          the transfer authorization is submitted to the chain or the verification before submitting fails.</p>
       </article>
     </div>
   </main>
