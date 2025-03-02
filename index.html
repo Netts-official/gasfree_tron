@@ -1,14 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GasFree Developer Documentation</title>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet" />
+  <!-- Подключение шрифта Inter (как на главной странице) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    /* Общие стили для светлой темы, имитирующие стиль главной страницы */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #333333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #ffffff;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 15px 0;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .header-left .site-title {
+      font-size: 1.8rem;
+      margin-left: 10px;
+      color: #333333;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+    .header-right nav a {
+      color: #007bff;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .header-right nav a:hover {
+      text-decoration: underline;
+    }
+    .version-switcher label {
+      margin-right: 5px;
+      font-weight: 600;
+      color: #333333;
+    }
+    /* Боковое меню */
+    .sidebar {
+      background-color: #f8f9fa;
+      border-right: 1px solid #e5e5e5;
+      padding: 20px;
+      max-width: 250px;
+    }
+    .sidebar h2 {
+      font-size: 1.25rem;
+      margin-bottom: 15px;
+      color: #333333;
+    }
+    .sidebar a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+    /* Основной контент */
+    .content {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    table, th, td {
+      border: 1px solid #e5e5e5;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #f0f0f0;
+      font-weight: 600;
+    }
+    pre {
+      background-color: #f8f8f8;
+      padding: 10px;
+      overflow: auto;
+      border: 1px solid #e5e5e5;
+    }
+    code {
+      font-family: 'Courier New', Courier, monospace;
+    }
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      background-color: #ffffff;
+      border-top: 1px solid #e5e5e5;
+      padding: 20px;
+      text-align: center;
+      color: #333333;
+    }
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .header-right {
+        margin-top: 10px;
+      }
+      .sidebar {
+        max-width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #e5e5e5;
+      }
+      .content {
+        padding: 15px;
+      }
+    }
+  </style>
 </head>
-
 <body class="light-theme">
   <!-- Шапка -->
   <header>
@@ -27,9 +154,7 @@
           <a href="https://t.me/nettswallet_bot/app" target="_blank">Wallet</a>
           <a href="https://github.com/Netts-official/gasfree_tron" target="_blank">GitHub</a>
         </nav>
-        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
-          Dark theme
-        </button>
+        <!-- Переключатель темы удалён – реализована только светлая тема -->
         <div class="version-switcher">
           <label for="version-select">Version:</label>
           <select id="version-select" onchange="location = this.value;">
@@ -753,31 +878,13 @@ print(response.json())
     </div>
   </main>
 
-  <!-- Скрипты для переключения темы и меню -->
+  <!-- Скрипт для переключения меню -->
   <script>
-    const themeToggleBtn = document.getElementById("themeToggleBtn");
-    const body = document.body;
     const menuToggle = document.querySelector('.menu-toggle');
     const topMenu = document.querySelector('.top-menu');
-
-    function toggleTheme() {
-      if (body.classList.contains("light-theme")) {
-        body.classList.remove("light-theme");
-        body.classList.add("dark-theme");
-        themeToggleBtn.textContent = "Dark theme";
-      } else {
-        body.classList.remove("dark-theme");
-        body.classList.add("light-theme");
-        themeToggleBtn.textContent = "White theme";
-      }
-    }
-
-    themeToggleBtn.addEventListener("click", toggleTheme);
-
     menuToggle.addEventListener('click', () => {
       topMenu.classList.toggle('active');
     });
   </script>
 </body>
-
-</html
+</html>
