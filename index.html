@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,47 +20,34 @@
       margin: 0;
       padding: 0;
     }
-
     a {
       color: #0d6efd;
       text-decoration: none;
     }
-
     a:hover {
       text-decoration: underline;
     }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
+    h1, h2, h3, h4, h5, h6 {
       font-weight: 600;
       margin-top: 1.5rem;
       margin-bottom: 1rem;
     }
-
     p {
       margin-bottom: 1rem;
     }
-
-    pre,
-    code {
+    pre, code {
       font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
       background-color: #f8f9fa;
       padding: 0.5rem;
       border-radius: 4px;
       font-size: 0.95rem;
     }
-
     /* Шапка */
     header {
       background-color: #f8f9fa;
       border-bottom: 1px solid #dee2e6;
       padding: 1rem 0;
     }
-
     .header-inner {
       max-width: 1140px;
       margin: 0 auto;
@@ -70,77 +56,62 @@
       justify-content: space-between;
       align-items: center;
     }
-
     .header-left {
       display: flex;
       align-items: center;
     }
-
     .site-title {
       font-size: 1.5rem;
       margin: 0 0 0 1rem;
     }
-
     .top-menu a {
       margin-right: 1rem;
     }
-
     /* Кнопка переключения темы скрыта (только светлая тема) */
     .theme-toggle-btn {
       display: none;
     }
-
     /* Верстка бокового меню */
     .sidebar {
       background-color: #f8f9fa;
       border-right: 1px solid #dee2e6;
       padding: 1rem;
     }
-
     .sidebar h2 {
       font-size: 1.25rem;
       margin-bottom: 1rem;
     }
-
     .table-of-contents ol {
       padding-left: 1rem;
     }
-
     .sidebar-repo-link p {
       margin-bottom: 0.5rem;
     }
-
     /* Основной контент */
     main.content {
       max-width: 1140px;
       margin: 1rem auto;
       padding: 0 1rem;
     }
-
     /* Стили таблиц */
     table {
       width: 100%;
       margin-bottom: 1rem;
       border-collapse: collapse;
     }
-
-    table th,
-    table td {
+    table th, table td {
       padding: 0.75rem;
       border: 1px solid #dee2e6;
       vertical-align: top;
     }
-
     /* Изображения схемы */
     .scheme-image img {
       max-width: 60%;
       height: auto;
     }
-
     .text-center {
       text-align: center;
     }
-
     /* Кнопка меню для мобильных устройств */
     .menu-toggle {
       background: none;
@@ -149,7 +120,6 @@
     }
   </style>
 </head>
-
 <body>
   <!-- Шапка -->
   <header>
@@ -188,12 +158,10 @@
           <li><a href="#overview"><strong>Overview</strong></a></li>
           <li><a href="#authorization-process"><strong>Authorization Process</strong></a></li>
           <li>
-            <a href="#signature-algorithm-and-provider-endpoint"><strong>Signature Algorithm and Provider
-                Endpoint</strong></a>
+            <a href="#signature-algorithm-and-provider-endpoint"><strong>Signature Algorithm and Provider Endpoint</strong></a>
             <ol>
               <li><a href="#31-parameters">3.1 Parameters</a></li>
-              <li><a href="#32-authorization-construction-and-signature">3.2 Authorization Construction and
-                  Signature</a></li>
+              <li><a href="#32-authorization-construction-and-signature">3.2 Authorization Construction and Signature</a></li>
               <li><a href="#33-provider-endpoint">3.3 Provider Endpoint</a></li>
             </ol>
           </li>
@@ -466,8 +434,9 @@
             rel="noopener noreferrer">https://open-test.gasfree.io/nile/</a>
         </li>
         <li>
-          GasFree website: <a href="https://gasfree.io" target="_blank" rel="noopener noreferrer">https://gasfree.io</a>
-          | <a href="https://test.gasfree.io" target="_blank" rel="noopener noreferrer">https://test.gasfree.io</a>
+          GasFree website: <a href="https://gasfree.io" target="_blank"
+            rel="noopener noreferrer">https://gasfree.io</a> | <a href="https://test.gasfree.io" target="_blank"
+            rel="noopener noreferrer">https://test.gasfree.io</a>
         </li>
         <li>
           Assets Withdrawal: <a href="https://gasfree.io/withdraw" target="_blank"
@@ -715,8 +684,7 @@ print(response.json())
             <li><code>tokenSymbol</code>: token name</li>
             <li><code>activateFee</code>: the activation handling fee for this token, measured in the smallest unit of
               that token</li>
-            <li><code>transferFee</code>: the transfer fee for this token, measured in the smallest unit of that token
-            </li>
+            <li><code>transferFee</code>: the transfer fee for this token, measured in the smallest unit of that token</li>
             <li><code>decimal</code>: precision of the token</li>
             <li><code>frozen</code>: current amount of the GasFree transfer in progress, including the fees</li>
           </ul>
@@ -865,20 +833,16 @@ print(response.json())
         <li><code>estimatedActivateFee</code>: estimated activation fee.</li>
         <li><code>estimatedTransferFee</code>: estimated transfer fee.</li>
         <li><code>estimatedTotalFee</code>: estimated activation fee plus estimated transfer fee.</li>
-        <li><code>estimatedTotalCost</code>: estimated amount that the user needs to pay, including the total fee and
-          the transfer amount.</li>
+        <li><code>estimatedTotalCost</code>: estimated amount that the user needs to pay, including the total fee and the transfer amount.</li>
         <li><code>txnHash</code>: transactionId of the corresponding transaction on-chain.</li>
         <li><code>txnBlockNum</code>: block height of the corresponding transaction on-chain.</li>
-        <li><code>txnBlockTimestamp</code>: timestamp of the block containing the corresponding transaction, in
-          milliseconds.</li>
-        <li><code>txnState</code>: state of the corresponding on-chain transaction (INIT, NOT_ON_CHAIN, ON_CHAIN,
-          SOLIDITY, ON_CHAIN_FAILED).</li>
+        <li><code>txnBlockTimestamp</code>: timestamp of the block containing the corresponding transaction, in milliseconds.</li>
+        <li><code>txnState</code>: state of the corresponding on-chain transaction (INIT, NOT_ON_CHAIN, ON_CHAIN, SOLIDITY, ON_CHAIN_FAILED).</li>
         <li><code>txnActivateFee</code>: actual activation fee consumed.</li>
         <li><code>txnTransferFee</code>: actual transfer fee consumed.</li>
         <li><code>txnTotalFee</code>: actual total fee consumed.</li>
         <li><code>txnAmount</code>: actual transferred amount to the recipient address.</li>
-        <li><code>txnTotalCost</code>: actual amount paid by the user, including the total fee and the transferred
-          amount.</li>
+        <li><code>txnTotalCost</code>: actual amount paid by the user, including the total fee and the transferred amount.</li>
       </ul>
       <p><strong>Note:</strong> All fields related to the transaction will be empty if the query is made either before
         the transfer authorization is submitted to the chain or the verification before submitting fails.</p>
@@ -896,5 +860,4 @@ print(response.json())
   <!-- Bootstrap Bundle JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
