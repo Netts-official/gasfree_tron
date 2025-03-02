@@ -14,8 +14,8 @@ All current versions and archives will be available here:
 
 Versions:
 
-1.0.2
-1.0.1
+- 1.0.2
+- 1.0.0
 
 ---
 
