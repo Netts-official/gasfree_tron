@@ -1,0 +1,220 @@
+/* Пример стилей в custom-styles.css */
+
+.site-header {
+  background-color: #f8f9fa;
+  /* Светло-серый фон для шапки */
+  border-bottom: 1px solid #dee2e6;
+  /* Линия-разделитель под шапкой */
+  padding: 15px 0;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-title {
+  font-size: 24px;
+  margin-left: 10px;
+  color: #343a40;
+  /* Темно-серый цвет заголовка */
+}
+
+.top-menu a {
+  margin-left: 20px;
+  color: #007bff;
+  /* Синий цвет ссылок меню */
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.site-sidebar {
+  background-color: #e9ecef;
+  /* Светло-серый фон для бокового меню */
+  padding: 20px;
+  border-right: 1px solid #dee2e6;
+  /* Линия-разделитель справа от меню */
+}
+
+.site-sidebar h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #343a40;
+}
+
+.table-of-contents ol {
+  list-style-type: none;
+  /* Убрать стандартные маркеры списка */
+  padding-left: 0;
+}
+
+.table-of-contents ol li {
+  margin-bottom: 8px;
+}
+
+.table-of-contents a {
+  color: #495057;
+  /* Темно-серый цвет ссылок в меню */
+  text-decoration: none;
+  display: block;
+  /* Сделать ссылки блочными для удобства клика */
+  padding: 5px 0;
+}
+
+.table-of-contents a:hover {
+  color: #0056b3;
+  /* Более темный синий цвет при наведении */
+}
+
+
+.site-content {
+  padding: 20px;
+}
+
+.main-title {
+  font-size: 36px;
+  margin-bottom: 30px;
+  color: #212529;
+  /* Очень темно-серый цвет главного заголовка */
+}
+
+.section-title {
+  font-size: 28px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  color: #212529;
+  border-bottom: 1px solid #ced4da;
+  /* Линия-разделитель под заголовком раздела */
+  padding-bottom: 5px;
+}
+
+.subsection-title {
+  font-size: 22px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: #343a40;
+}
+
+.subsubsection-title {
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #495057;
+}
+
+.doc-paragraph {
+  line-height: 1.6;
+  /* Улучшить межстрочное расстояние для читабельности */
+  margin-bottom: 15px;
+  color: #495057;
+}
+
+.doc-list li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+  color: #495057;
+}
+
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  border: 1px solid #ced4da;
+}
+
+.doc-table th,
+.doc-table td {
+  border: 1px solid #ced4da;
+  padding: 8px;
+  text-align: left;
+}
+
+.doc-table th {
+  background-color: #f2f2f2;
+  /* Светло-серый фон для заголовков таблицы */
+  font-weight: bold;
+}
+
+.code-block {
+  background-color: #f8f8f8;
+  /* Светлый фон для блоков кода */
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow-x: auto;
+  /* Добавить горизонтальную прокрутку, если код не помещается */
+  font-family: monospace;
+  /* Моноширинный шрифт для кода */
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+
+.python-code {
+  /* Можно добавить специфические стили для Python, например, подсветку синтаксиса (потребуется библиотека) */
+}
+
+.json-code {
+  /* Можно добавить специфические стили для JSON, например, цветное выделение ключей и значений */
+}
+
+.site-footer {
+  background-color: #f8f9fa;
+  /* Светло-серый фон для подвала */
+  border-top: 1px solid #dee2e6;
+  /* Линия-разделитель над подвалом */
+  padding: 20px 0;
+  text-align: center;
+  color: #6c757d;
+  /* Серый цвет текста в подвале */
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__icons img {
+  width: 24px;
+  /* Примерный размер иконок */
+  height: 24px;
+  margin-left: 10px;
+}
+
+
+/* Дополнительные стили для списков (по желанию) */
+.field-description-list li {
+  list-style-type: disc;
+  /* Маркеры для списков описания полей */
+}
+
+.request-parameters-list li {
+  list-style-type: decimal;
+  /* Нумерация для списков параметров запроса */
+}
+
+.notes-list li {
+  list-style-type: decimal;
+  /* Нумерация для списка заметок */
+}
+
+.error-types-list li {
+  list-style-type: disc;
+  /* Маркеры для списка типов ошибок */
+}
+
+.config-list li {
+  list-style-type: circle;
+  /* Другие маркеры для внутренних списков конфигов */
+}
+
+.assets-list li {
+  list-style-type: square;
+  /* Другие маркеры для внутренних списков ассетов */
+}
+
+.provider-links li {
+  margin-bottom: 10px;
+  /* Увеличим отступ между ссылками провайдеров */
+}
