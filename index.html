@@ -149,12 +149,13 @@
       bottom: -8px;
     }
 
-    /* Боковое меню */
+    /* Боковое меню с отступами */
     .sidebar {
       width: 300px;
       background-color: #fff;
       border-right: 1px solid #e5e7eb;
-      padding: 20px;
+      padding: 30px 25px;
+      /* Увеличенные отступы */
       position: fixed;
       top: 100px;
       bottom: 0;
@@ -165,16 +166,19 @@
       font-size: 1.25rem;
       font-weight: 700;
       color: #182848;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+      /* Увеличенный отступ */
     }
 
     .table-of-contents ol {
-      padding-left: 20px;
+      padding-left: 15px;
+      /* Отступ для вложенных списков */
       list-style: decimal;
     }
 
     .table-of-contents li {
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      /* Увеличенный отступ между пунктами */
     }
 
     .table-of-contents a {
@@ -191,10 +195,13 @@
     .table-of-contents ol ol {
       list-style: lower-roman;
       padding-left: 20px;
+      margin-top: 10px;
+      /* Добавлен отступ сверху для вложенных списков */
     }
 
     .sidebar-repo-link p {
-      margin: 10px 0;
+      margin: 15px 0;
+      /* Увеличенные отступы */
       color: #333;
     }
 
@@ -209,14 +216,16 @@
     }
 
     .footer__info p {
-      margin: 5px 0;
+      margin: 10px 0;
+      /* Увеличенные отступы */
       color: #333;
     }
 
     .footer__icons {
       display: flex;
       gap: 15px;
-      margin-top: 10px;
+      margin-top: 15px;
+      /* Увеличенный отступ */
     }
 
     .footer__icons a img {
@@ -284,21 +293,33 @@
       margin-bottom: 10px;
     }
 
+    /* Кодовые блоки с темным фоном для контраста */
     .content pre {
-      background-color: #f9fafb;
-      padding: 15px;
-      border-radius: 5px;
+      background-color: #2d2d2d;
+      /* Темно-серый фон, как в TRON docs */
+      color: #f8f8f2;
+      /* Светлый текст для контраста */
+      padding: 20px;
+      /* Увеличенные отступы */
+      border-radius: 8px;
+      /* Скругленные углы */
       overflow-x: auto;
-      border: 1px solid #e5e7eb;
-      margin-bottom: 15px;
+      border: none;
+      /* Убрана граница */
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      /* Легкая тень для глубины */
     }
 
     .content code {
       font-family: 'Courier New', Courier, monospace;
-      color: #182848;
-      font-size: 0.9rem;
+      color: #f8f8f2;
+      /* Светлый цвет текста в коде */
+      font-size: 0.95rem;
+      /* Чуть крупнее для читаемости */
     }
 
+    /* Таблицы */
     .content table {
       width: 100%;
       border-collapse: collapse;
@@ -336,6 +357,8 @@
         width: 100%;
         border-right: none;
         border-bottom: 1px solid #e5e7eb;
+        padding: 20px;
+        /* Меньшие отступы для мобильных */
       }
 
       .content {
